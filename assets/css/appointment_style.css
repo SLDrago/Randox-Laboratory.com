@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+:root{
+    --blue:#0080FE;
+    --red:#FF0000;
+    --black:#444;
+    --light-color:#111;
+    --box-shadow:.5rem .5rem 0 rgba(22, 160, 133, .2);
+    --text-shadow:.4rem .4rem 0 rgba(0, 0, 0, .2);
+    --border:.2rem solid var(--blue);
+    --border-red: .2rem solid var(--red);
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding: 0;
+    box-sizing: border-box;
+    outline: none; border: none;
+    text-transform: capitalize;
+    transition: all .2s ease-out;
+    text-decoration: none;
+}
+
+html{
+    overflow-x: hidden;
+    scroll-padding-top: 7rem;
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: #a7c8ff;
+}
+
+section{
+    padding:2rem 9%;
+}
+
+section:nth-child(even){
+    background: #f5f5f5;
+}
+
+.heading{
+    text-align: center;
+    padding-bottom: 2rem;
+    text-shadow: var(--text-shadow);
+    text-transform: uppercase;
+    color:var(--black);
+    font-size: 4.5rem;
+    letter-spacing: .4rem;
+}
+
+.heading span{
+    text-transform: uppercase;
+    color:var(--blue);
+}
+
+.btn{
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .5rem;
+    padding-left: 1rem;
+    border:var(--border);
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.7rem;
+    background: var(--blue);
+}
+
+.btn span{
+    padding:.7rem 1rem;
+    border-radius: .5rem;
+    background: #fff;
+    color: var(--blue);
+    margin-left: .5rem;
+}
+
+/* .btn:hover{
+    background: var(--blue);
+    color:#fff;
+}
+
+.btn:hover span{
+    color: var(--blue);
+    background:#fff;
+    margin-left: 1rem;
+} */
+
+.btn-next:hover {
+    background: var(--blue);
+    color: #fff;
+}
+
+.btn-next:hover span {
+    color: #fff;
+    background: var(--blue);
+    margin-left: 1rem;
+}
+
+.btn-red{
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .5rem;
+    padding-left: 1rem;
+    border:var(--border-red);
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    color:#fff;
+    cursor: pointer;
+    font-size: 1.7rem;
+    background: var(--red);
+}
+
+.btn-red span{
+    padding:.7rem 1rem;
+    border-radius: .5rem;
+    background: #fff;
+    color: var(--red);
+    margin-left: .5rem;
+}
+
+/* .btn-red:hover{
+    background: var(--red);
+    color:#fff;
+}
+
+.btn-red:hover span{
+    color: var(--red);
+    background:#fff;
+    margin-left: 1rem;
+} */
+
+.btn-proceed:hover {
+    background: #fff;
+    color: var(--red);
+}
+
+.btn-proceed:hover span {
+    color: #fff;
+    background: var(--red);
+    margin-left: 1rem;
+}
+
+.btn-left {
+    text-align: left;
+}
+
+
+.btn-back:hover {
+    background: var(--blue);
+    color: #fff;
+}
+
+.btn-back:hover span {
+    color: var(--blue);
+    background: #fff;
+    margin-left: 1rem;
+}
+
+
+.header{
+    padding:2rem 9%;
+    position: fixed;
+    top:0; left: 0; right: 0;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #33d9b2;
+}
+
+.appointment .row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:2rem;
+}
+ 
+.appointment .row .image{
+    flex:1 1 45rem;
+}
+
+.appointment .row .image img{
+    width: 100%;
+}
+
+.appointment .row form{
+    flex:1 1 45rem;
+    background: #fff;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    padding: 2rem;
+    border-radius: .5rem;
+}
+.appointment .row form .message{
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+    padding: 1.5rem 1rem;
+    font-size: 1.7rem;
+    text-align: center;
+
+}
+.appointment .row form h3{
+    color:var(--black);
+    padding-bottom: 1rem;
+    font-size: 3rem;
+}
+
+.appointment .row form label {
+    text-align: left;
+    font-weight: bold;
+    width: 100%;
+}
+
+.appointment .row form p {
+    text-align: right;
+    
+}
+
+.appointment .row form .box{
+    width: 100%;
+    margin:.7rem 0;
+    border-radius: .5rem;
+    border: #a7acb1 0.2rem solid;
+    font-size: 1rem;
+    color: var(--black);
+    text-transform: none;
+    padding: 0.7rem;
+}
+
+.appointment .row form .box:focus{
+    border: var(--border);
+}
+
+.appointment .row form .btn{
+    padding:0.2rem 3rem;
+    float: inherit;
+    font-size: 1.5rem;
+}
+
+.appointment .row form .btn-red{
+    padding:0.2rem 3rem;
+    float: right;
+    font-size: 1.5rem;
+}
+
+.footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap:2rem;
+}
+
+.footer .box-container .box h3{
+    font-size: 2.5rem;
+    color:var(--black);
+    padding: 1rem 0;
+}
+
+.footer .box-container .box a{
+    display: block;
+    font-size: 1.5rem;
+    color:var(--light-color);
+    padding: 1rem 0;
+}
+
+.footer .box-container .box a i{
+    padding-right: .5rem;
+    color:var(--blue);
+}
+
+.footer .box-container .box a:hover i{
+    padding-right:2rem;
+}
+
+.footer .credit{
+    padding: 1rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    color:var(--light-color);
+    border-top: .1rem solid rgba(0, 0, 0, .1);
+}
+
+.footer .credit span{
+    color:var(--blue);
+}
+
+
+/* media queries  */
+@media (max-width:991px){
+
+    html{
+        font-size: 55%;
+    }
+
+    .header{
+        padding: 2rem;
+    }
+
+    section{
+        padding:2rem;
+    }
+
+}
+
+@media (max-width:768px){
+
+    #menu-btn{
+        display: initial;
+    }
+
+    .header .navbar{
+        position: absolute;
+        top:115%; right: 2rem;
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        width: 30rem;
+        border: var(--border);
+        background: #fff;
+        transform: scale(0);
+        opacity: 0;
+        transform-origin: top right;
+        transition: none;
+    }
+
+    .header .navbar.active{
+        transform: scale(1);
+        opacity: 1;
+        transition: .2s ease-out;
+    }
+
+    .header .navbar a{
+        font-size: 2rem;
+        display: block;
+        margin:2.5rem;
+    }
+
+}
+
+@media (max-width:450px){
+
+    html{
+        font-size: 50%;
+    }
+
+}

@@ -23,19 +23,19 @@
 
 
             <?php
-            if (!isset($_POST['next']) || array_key_exists('back', $_POST)){ ?>
+            if (!isset($_POST['next']) || isset($_POST['back'])){ ?>
                 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
                     <h3>make appointment</h3>
                     <label>Full Name:
-                        <input type="text" name="name" placeholder="your name" class="box" value="<?php echo $_POST['name']; ?>"></label>
+                        <input type="text" name="name" placeholder="your name" class="box" value="<?php echo $_POST['name'] ?? ''; ?>"></label>
                     <label>N.I.C:
-                        <input type="text" name="nic" placeholder="your NIC" class="box" value="<?php echo $_POST['nic']; ?>"></label>
+                        <input type="text" name="nic" placeholder="your NIC" class="box" value="<?php echo $_POST['nic'] ?? ''; ?>"></label>
                     <label>Birthday:
-                        <input type="date" name="bd" placeholder="Your Birthday" class="box" value="<?php echo $_POST['bd']; ?>"></label>
+                        <input type="date" name="bd" placeholder="Your Birthday" class="box" value="<?php echo $_POST['bd'] ?? ''; ?>"></label>
                     <label>Phone No:
-                        <input type="text" name="number" placeholder="your Phone-number" class="box" value="<?php echo $_POST['pnumber']; ?>"></label>
+                        <input type="text" name="number" placeholder="your Phone-number" class="box" value="<?php echo $_POST['number'] ?? ''; ?>"></label>
                     <label>Email:
-                    <input type="email" name="email" placeholder="your email" class="box" value="<?php echo $_POST['email']; ?>"></label>
+                    <input type="email" name="email" placeholder="your email" class="box" value="<?php echo $_POST['email'] ?? ''; ?>"></label>
                     <div class="btn-left"><input type="submit" name="next" value="Next" class="btn btn-next"></div>
                 </form>
             <?php
@@ -84,13 +84,9 @@
             ?>
 
     </div>
-
 </section>
-<?php
-if (array_key_exists('pay', $_POST)){
-    echo "Payment Done!";
-}
-?>
+
+
 <script type="text/javascript">
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');

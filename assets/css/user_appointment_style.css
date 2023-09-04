@@ -54,6 +54,13 @@ section:nth-child(even){
     color:var(--blue);
 }
 
+.msg{
+    display: block;
+    background: #dc3545;
+    color: white;
+    text-align: center;
+}
+
 .btn{
     display: inline-block;
     margin-top: 1rem;

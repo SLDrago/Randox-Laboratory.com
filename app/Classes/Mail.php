@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace Classes;
 
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -17,11 +17,11 @@ class Mail
     public function __construct()
     {
         $this->sendMailFrom = "randoxlaboratories571@gmail.com";
-        $this->emailAppPassword = "vxyhjgboyjugyvtn";
+        $this->emailAppPassword = "dkcujmsfnjkxpiuu";
         $this->companyName = "Randox-Laboratories";
     }
 
-    public function sendMail($email, $subject, $body): int
+    public function sendMail($email, $subject, $body): int|string
     {
         $mail = new PHPMailer(true);
 
@@ -48,7 +48,7 @@ class Mail
             return 1;
 
         } catch (Exception $e) {
-            return 0;
+            return $e->getMessage();
         }
     }
 

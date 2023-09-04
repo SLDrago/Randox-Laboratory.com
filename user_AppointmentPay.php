@@ -1,24 +1,28 @@
 <?php
 include 'app/Config/priceList.php';
-include 'app/Config/dbh.php';
 $reportTypes = fetchReportTypesFromDatabase();
 
-use Models\UserAccount;
-use Models\Appointment;
+use Classes\{DbConnector, Payment, UserAccount, Appointment};
+
 require_once 'vendor/autoload.php';
 
-if (isset($_POST['pay']) && isset($conn)){
-    if ($_POST['fname'] != '' && $_POST['bd'] != '' && $_POST['pnumber'] != '' && $_POST['appointDate'] != '' && $_POST['timeslot'] != ''){
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $nic = $_POST['nic'];
-    $bd = $_POST['bd'];
-    $pnumber = $_POST['pnumber'];
-    $email = $_POST['email'];
-    $reporttype= $_POST['reporttype'];
-    $date = $_POST['appointDate'];
-    $timeslot = $_POST['timeslot'];
-    $name = $fname." ".$lname;
+if (isset($_POST['pay'])) {
+    if ($_POST['fname'] != '' && $_POST['bd'] != '' && $_POST['pnumber'] != '' && $_POST['appointDate'] != '' && $_POST['timeslot'] != '') {
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $nic = $_POST['nic'];
+        $bd = $_POST['bd'];
+        $pnumber = $_POST['pnumber'];
+        if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $email = $_POST['email'];
+        } else {
+            header("location: user_Appointment.php?msg=Enter a Valid Email");
+            die();
+        }
+        $reporttype = $_POST['reporttype'];
+        $date = $_POST['appointDate'];
+        $timeslot = $_POST['timeslot'];
+        $name = $fname . " " . $lname;
 
         $report = "";
         $amount = 0;
@@ -36,61 +40,40 @@ if (isset($_POST['pay']) && isset($conn)){
             exit();
         }
 
-    switch ($timeslot){
-        case 1:
-            $timePeriod = "8.00 A.M - 10.00 A.M";
-            break;
-        case 2:
-            $timePeriod = "10.00 A.M - 12.00 P.M";
-            break;
-        case 3:
-            $timePeriod = "1.00 P.M - 3.00 P.M";
-            break;
-        default:
-            header("location: user_Appointment.php?msg=Some data are missing...");
-            exit();
-    }
+        switch ($timeslot) {
+            case 1:
+                $timePeriod = "8.00 A.M - 10.00 A.M";
+                break;
+            case 2:
+                $timePeriod = "10.00 A.M - 12.00 P.M";
+                break;
+            case 3:
+                $timePeriod = "1.00 P.M - 3.00 P.M";
+                break;
+            default:
+                header("location: user_Appointment.php?msg=Some data are missing...");
+                exit();
+        }
 
-    $appointment = new Appointment($conn);
+        $appointment = new Appointment();
+        $account = new UserAccount();
+        $db = new DbConnector();
+        $payment = new Payment();
+        $conn = $db->getConnection();
 
-    $merchant_id = "1223771";
-    $order_id = $appointment->getUniqueAppointmentID();
-    $currency = "LKR";
-    $merchant_secret="MzM4ODU2MTU0NDY3MTQyNDE5MjI4NDAzNDM0MDkyODI0NzMyODUw";
+        $order_id = $appointment->getUniqueAppointmentID($conn);
+        $hash = $payment->generateHash($order_id, $amount);
+        $uname = $account->createUserName($fname);
+        $password = $account->createPW();
 
-    $hash = strtoupper(
-        md5(
-            $merchant_id .
-            $order_id .
-            number_format($amount, 2, '.', '') .
-            $currency .
-            strtoupper(md5($merchant_secret))
-        )
-    );
-
-    $obj = new UserAccount($fname);
-    $uname = $obj->createUserName();
-    $password  = $obj->createPW();
         $options = [
             'cost' => 12,
         ];
-    $hashedpassword = password_hash($password, PASSWORD_BCRYPT, $options);
+        $hashedpassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
-    $check = "SELECT * FROM customer WHERE customer_pnumber = ?";
-        $stmt = $conn->prepare($check);
-        $stmt->bind_param('s', $pnumber);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows === 1) {
-            $query = "UPDATE customer SET customer_name = ?,customer_bd = ?,customer_nic = ?,customer_pnumber = ?, username = ?, password = ? WHERE customer_pnumber = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('sssssss', $name, $bd, $nic, $pnumber, $uname, $hashedpassword, $pnumber);
-            $stmt->execute();
-        }else{
-            $query = "INSERT INTO customer (customer_name,customer_bd,customer_nic,customer_pnumber,customer_email,username,password) VALUES (?,?,?,?,?,?,?)";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('sssssss', $name, $bd, $nic, $pnumber, $email, $uname, $hashedpassword);
-            $stmt->execute();
+        if (!($account->addUser($conn, $name, $bd, $nic, $email, $pnumber, $uname, $hashedpassword))) {
+            header("location: user_Appointment.php?msg=Something Wrong!");
+            die();
         }
 
         $currentDateTime = new DateTime('now');
@@ -98,74 +81,52 @@ if (isset($_POST['pay']) && isset($conn)){
         date_default_timezone_set("Asia/Colombo");
         $currentTime = date("H:i:s");
 
-        $customerquery = "SELECT * FROM customer WHERE customer_pnumber = ?";
-        $stmt = $conn->prepare($customerquery);
-        $stmt->bind_param('s', $pnumber);
-        $stmt->execute();
-        $customerquery_run = $stmt->get_result();
-        if ($customerquery_run) {
-            foreach ($customerquery_run as $row) {
-                $customerId = $row['customer_id'];
-                $check = "SELECT * FROM payment WHERE appointment_id = ?";
-                $stmt = $conn->prepare($check);
-                $stmt->bind_param('s', $order_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if ($result->num_rows === 0) {
-                    $query = "INSERT INTO payment (customer_id,appointment_id,payment_date,payment_time,payment_amount) VALUES (?,?,?,?,?)";
-                    $stmt = $conn->prepare($query);
-                    $stmt->bind_param('sssss', $customerId, $order_id, $currentDate, $currentTime, $amount);
-                    $stmt->execute();
+        $customerId = $account->getCustomerID($conn, $pnumber);
+        if ($customerId != null) {
+            if ($payment->getPaymentID($conn, $order_id) == null) {
+                if (!$payment->addPaymentEntry($conn, $customerId, $order_id, $currentDate, $currentTime, $amount)) {
+                    header("location: user_Appointment.php?msg=Something Wrong!");
+                    die();
                 }
             }
         }
 
-        $customerquery = "SELECT * FROM customer WHERE customer_pnumber = ?";
-        $stmt = $conn->prepare($customerquery);
-        $stmt->bind_param('s', $pnumber);
-        $stmt->execute();
-        $customerquery_run = $stmt->get_result();
-        if ($customerquery_run) {
-            foreach ($customerquery_run as $row) {
-                $customerId = $row['customer_id'];
-                $paymentquery = "SELECT * FROM payment WHERE appointment_id = ?";
-                $stmt = $conn->prepare($paymentquery);
-                $stmt->bind_param('s', $order_id);
-                $stmt->execute();
-                $paymentquery_run = $stmt->get_result();
-                if ($paymentquery_run) {
-                    foreach ($paymentquery_run as $data) {
-                        $paymentId = $data['payment_id'];
-                        $query = "INSERT INTO appointment (appointment_id,payment_id,customer_id,report_type,appinment_date,appointment_time) VALUES (?,?,?,?,?,?)";
-                        $stmt = $conn->prepare($query);
-                        $stmt->bind_param('siiisi', $order_id, $paymentId, $customerId, $reporttype, $date, $timeslot);
-                        $stmt->execute();
-                    }
+        $customerId = $account->getCustomerID($conn, $pnumber);
+        if ($customerId != null) {
+            $paymentId = $payment->getPaymentID($conn, $order_id);
+            if ($paymentId != null) {
+                if (!$appointment->addAppointmentEntry($conn, $order_id, $paymentId, $customerId, $reporttype, $date, $timeslot)) {
+                    header("location: user_Appointment.php?msg=Something Wrong!");
+                    die();
                 }
             }
         }
 
+    } else {
+        header("location: user_Appointment.php?msg=Some data are missing...");
+        exit();
+    }
 
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/appointment_style.css">
-    <title>Payment</title>
-</head>
-<body>
-<section class="appointment" id="appointment">
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
+        <title>Payment</title>
+    </head>
+    <body>
+    <section class="appointment" id="appointment">
 
-    <div class="row">
+        <div class="row">
 
-        <div class="image">
-            <img src="/assets/images/appointment/appointment-img.svg" alt="">
-        </div>
+            <div class="image">
+                <img src="/assets/images/appointment/appointment-img.svg" alt="">
+            </div>
 
 
             <form method="post" action="https://sandbox.payhere.lk/pay/checkout">
@@ -214,13 +175,13 @@ if (isset($_POST['pay']) && isset($conn)){
                         </tr>
                     </table>
                 </div>
-                <input type="hidden" name="merchant_id" value="<?php echo $merchant_id; ?>">
-                <input type="hidden" name="return_url" value="http://localhost:8080/Randox-Laboratory.com/user_AppointmentPay.php">
-                <input type="hidden" name="cancel_url" value="http://localhost:8080/Randox-Laboratory.com/user_AppointmentPay.php">
-                <input type="hidden" name="notify_url" value="http://localhost:8080/Randox-Laboratory.com/success.php">
+                <input type="hidden" name="merchant_id" value="<?php echo $payment->getMerchantId(); ?>">
+                <input type="hidden" name="return_url" value="<?php echo $payment->getReturnUrl(); ?>">
+                <input type="hidden" name="cancel_url" value="<?php echo $payment->getCancelUrl(); ?>">
+                <input type="hidden" name="notify_url" value="<?php echo $payment->getNotifyUrl(); ?>">
                 <input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
-                <input type="hidden" name="items" value="<?php echo $reporttype; ?>">
-                <input type="hidden" name="currency" value="LKR">
+                <input type="hidden" name="items" value="<?php echo $report; ?>">
+                <input type="hidden" name="currency" value="<?php echo $payment->getCurrency(); ?>">
                 <input type="hidden" name="amount" value="<?php echo $amount; ?>">
                 <input type="hidden" name="first_name" value="<?php echo $fname; ?>">
                 <input type="hidden" name="last_name" value="<?php echo $lname; ?>">
@@ -229,38 +190,33 @@ if (isset($_POST['pay']) && isset($conn)){
                 <input type="hidden" name="address" value="">
                 <input type="hidden" name="city" value="">
                 <input type="hidden" name="country" value="Sri Lanka">
-                <input type="hidden" name="hash" value="<?php echo $hash; ?>">    <!-- Replace with generated hash -->
+                <input type="hidden" name="hash" value="<?php echo $hash; ?>">
                 <input type="submit" value="Pay Now" class="btn-red btn-proceed" onclick="sendEmail()">
             </form>
         </div>
 
-</section>
+    </section>
 
-<script>
-    function sendEmail() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState === 4 && this.status === 200) {
-                // Handle the response from the server if needed
-                console.log(this.responseText);
-            }
-        };
-        xhttp.open("GET", "send_email.php?email=<?php echo $email; ?>&uname=<?php echo $uname; ?>&password=<?php echo $password; ?>&appointmentID=<?php echo $order_id; ?>", true);
-        xhttp.send();
-    }
-</script>
+    <script>
+        function sendEmail() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    // Handle the response from the server if needed
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "send_email.php?email=<?php echo $email; ?>&uname=<?php echo $uname; ?>&password=<?php echo $password; ?>&appointmentID=<?php echo $order_id; ?>", true);
+            xhttp.send();
+        }
+    </script>
 
-</body>
-</html>
+    </body>
+    </html>
 <?php
-}else{
-        header("location: user_Appointment.php?msg=Some data are missing...");
-        exit();
-    }
 }
-
-if (isset($_GET['order_id'])){
-?>
+if (isset($_GET['order_id'])) {
+    ?>
     <!doctype html>
     <html lang="en">
     <head>
@@ -269,19 +225,19 @@ if (isset($_GET['order_id'])){
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/appointment_style.css">
+        <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
         <title>Payment Done!</title>
     </head>
     <body>
     <div>
         <form>
-        <p>Your Payment is Processed! If Payment is completed successfully You will receive a SMS and Email.</p>
-        <p>Order ID: <?php echo $_GET['order_id']; ?></p>
+            <p>Your Payment is Processed! If Payment is completed successfully You will receive an SMS and Email.</p>
+            <p>Appointment ID: <?php echo $_GET['order_id']; ?></p>
         </form>
     </div>
     </body>
     </html>
 
-<?php
+    <?php
 }
 ?>

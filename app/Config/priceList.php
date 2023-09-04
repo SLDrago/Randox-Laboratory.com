@@ -23,5 +23,5 @@ function fetchReportTypesFromDatabase(): array
 
     return $reportTypes;
 }
-?>
+
 

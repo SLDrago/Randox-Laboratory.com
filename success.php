@@ -2,7 +2,7 @@
 include 'app/Config/dbh.php';
 require_once 'vendor/autoload.php';
 
-use Models\Mail;
+use Classes\Mail;
 
 $merchant_id         = $_POST['merchant_id'];
 $order_id            = $_POST['order_id'];

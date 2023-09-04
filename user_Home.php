@@ -19,14 +19,13 @@ include 'Common/webHeader.php';
     <video class="video-slide" src="assets/videos/video4.mp4" autoplay muted loop></video>
     <video class="video-slide" src="assets/videos/video5.mp4" autoplay muted loop></video>
 
-    <!-- this div class should include content active -->
-    <!-- <div class="content active" style="background-image: url('pexels-chokniti.jpg');"> -->
+
     <div class="content active">
 
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -36,9 +35,9 @@ include 'Common/webHeader.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -47,9 +46,9 @@ include 'Common/webHeader.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -58,9 +57,9 @@ include 'Common/webHeader.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -69,9 +68,9 @@ include 'Common/webHeader.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox

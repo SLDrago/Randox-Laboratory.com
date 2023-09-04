@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="assets/css/webNavbar_style.css">
+    <link rel="stylesheet" href="assets/css/user_webNavbar_style.css">
     <link rel="stylesheet" href="assets/css/user_home_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
 <?php
-include 'app/Views/Common/webNavbar.php';
+include 'Common/webHeader.php';
 ?>
 <section class="home">
     <video class="video-slide active" src="assets/videos/video1.mp4"  autoplay muted loop></video>
@@ -19,14 +19,13 @@ include 'app/Views/Common/webNavbar.php';
     <video class="video-slide" src="assets/videos/video4.mp4" autoplay muted loop></video>
     <video class="video-slide" src="assets/videos/video5.mp4" autoplay muted loop></video>
 
-    <!-- this div class should include content active -->
-    <!-- <div class="content active" style="background-image: url('pexels-chokniti.jpg');"> -->
+
     <div class="content active">
 
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -36,9 +35,9 @@ include 'app/Views/Common/webNavbar.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -47,9 +46,9 @@ include 'app/Views/Common/webNavbar.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -58,9 +57,9 @@ include 'app/Views/Common/webNavbar.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
@@ -69,9 +68,9 @@ include 'app/Views/Common/webNavbar.php';
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
-        <p>
-        <h3>Your Health. Our Commitment.</h3><br><br>
 
+        <h3>Your Health. Our Commitment.</h3><br><br>
+        <p>
         Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox

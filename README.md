@@ -24,6 +24,7 @@ emphasis on effective appointment management, streamlined report preparation, an
 - [@Kalana_Piyumantha](https://github.com/KalanaPiyumantha)
 - [@Thilina_Pathum](https://github.com/ThiliPathum)
 - [@Sakila_Gunawardhane](https://github.com/iit20028)
+- [@Vishwa_Lakshan](https://github.com/VishwaLakshan)
 
 
 ![Logo](https://github.com/SLDrago/Randox-Laboratory.com/blob/main/assets/images/logo/logo.png)

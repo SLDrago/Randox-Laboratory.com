@@ -9,11 +9,12 @@
     "phpmailer/phpmailer": "^6.8.0",
     "dompdf/dompdf": "^2.0.3",
     "ext-mysqli": "*",
-    "notifylk/notify-php": "*@dev"
+    "notifylk/notify-php": "*@dev",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {
-      "Models\\": "app/Models/"
+      "Classes\\": "app/Classes/"
     }
   }
 }

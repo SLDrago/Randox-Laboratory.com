@@ -1,0 +1,274 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px;
+    background-image: url("../../assets/images/Profile/profile_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: blur(5);
+}
+
+.container {
+    position: relative;
+    max-width: 550px;
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.849);
+}
+
+.container header {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+}
+
+header{
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 200px;
+    transition: 0.5s ease;
+}
+
+
+header .navigation{
+    position: relative;
+}
+
+header .navigation .navigation-items a{
+    position: relative;
+    color: #710909;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 27px;
+    transition: 0.3s ease;
+}
+
+header .navigation .navigation-items .nav-link:hover {
+    background: #ffa500;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+header .navigation .navigation-items a button{
+    padding: 5px 25px;
+    border-radius: 25px;
+    background-color: #000D4D;
+    border: none;
+    color: #fff;
+}
+
+header .navigation .navigation-items a button:hover{
+    background-color: #ffa500;
+    padding: 6px 27px;
+}
+
+header .navigation .navigation-items a::before{
+    content: '';
+    position: absolute;
+    background: #fff;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s ease;
+}
+
+header.navigation .navigation-items a:hover:before{
+    width: 100%;
+}
+
+.slider-navigation .nav-btn.active{
+    background: #2696E9;
+}
+
+.container .form {
+    margin-top: 60px;
+}
+
+.form .input-box {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.input-box label {
+    color: #000000;
+}
+
+.form :where(.input-box input, .select-box) {
+    position: relative;
+    height: 30px;
+    width: 100%;
+    outline: none;
+    font-size: 0.8rem;
+    color: #707070;
+    margin-top: 2px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+.input-box input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+.card {
+    width: 200px; /* Adjust the width to your preference */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 50px;
+    background-color: white;
+}
+
+.upload {
+    position: relative;
+    text-align: left;
+}
+
+.upload img {
+    border-radius: 50%;
+    border: 8px solid #f5f3f3;
+    width: 125px;
+    height: 125px;
+}
+
+.upload .rightRound,
+.upload .leftRound {
+    position: absolute;
+    bottom: 0;
+    background: #ffc800;
+    width: 32px;
+    height: 32px;
+    line-height: 33px;
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    color: white;
+}
+
+.upload .rightRound {
+    right: 0;
+}
+
+.upload .leftRound {
+    left: 0;
+    background: red;
+}
+
+.upload input {
+    position: absolute;
+    transform: scale(2);
+    opacity: 0;
+}
+
+.upload input::-webkit-file-upload-button,
+.upload input[type=submit] {
+    cursor: pointer;
+}
+
+
+.form .column {
+    display: flex;
+    column-gap: 15px;
+}
+
+.form .gender-box {
+    margin-top: 20px;
+}
+
+.gender-box h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.form :where(.gender-option, .gender) {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+    flex-wrap: wrap;
+}
+
+.form .gender {
+    column-gap: 10px;
+}
+
+.gender input {
+    accent-color: rgb(176, 136, 24);
+}
+
+.form :where(.gender input, .gender label) {
+    cursor: pointer;
+}
+
+.gender label {
+    color: #707070;
+}
+
+.address :where(input, .select-box) {
+    margin-top: 2px;
+}
+
+.select-box select {
+    height: 100%;
+    width: 100%;
+    outline: goldenrod;
+    border: #ffa500;
+    color: #707070;
+    font-size: 1rem;
+}
+
+.form button {
+    height: 35px;
+    width: 100%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgb(113, 9, 9);
+}
+
+.form button:hover {
+    background: rgb(176, 136, 24);
+}
+
+/*Responsive*/
+@media screen and (max-width: 500px) {
+    .form .column {
+        flex-wrap: wrap;
+    }
+    .form :where(.gender-option, .gender) {
+        row-gap: 15px;
+    }
+}

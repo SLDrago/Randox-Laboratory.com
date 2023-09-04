@@ -64,24 +64,24 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
         <?php if ($formStep === 'step1') { ?>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <h3>make appointment</h3>
-                <div class="msg"><?php echo $msg; ?></div>
+                <div class="msg"><?php echo htmlspecialchars($msg); ?></div>
                 <label>Full Name:
                     <input type="text" name="fname" placeholder="First name" class="box"
-                           value="<?php echo $name[0] ?? ''; ?>" required>
+                           value="<?php echo htmlspecialchars($name[0] ?? ''); ?>" required>
                     <input type="text" name="lname" placeholder="Last name" class="box"
-                           value="<?php echo $name[1] ?? ''; ?>" required></label>
+                           value="<?php echo htmlspecialchars($name[1] ?? ''); ?>" required></label>
                 <label>N.I.C:
                     <input type="text" name="nic" placeholder="Your NIC" class="box"
-                           value="<?php echo $details->getCustomerNIC(); ?>" required></label>
+                           value="<?php echo htmlspecialchars($details->getCustomerNIC()); ?>" required></label>
                 <label>Birthday:
                     <input type="date" name="bd" placeholder="Your Birthday" class="box"
-                           value="<?php echo $details->getCustomerBD(); ?>" required></label>
+                           value="<?php echo htmlspecialchars($details->getCustomerBD()); ?>" required></label>
                 <label>Phone No:
                     <input type="text" name="number" placeholder="your Phone-number" class="box"
-                           value="<?php echo $details->getCustomerPNumber(); ?>" required></label>
+                           value="<?php echo htmlspecialchars($details->getCustomerPNumber()); ?>" required></label>
                 <label>Email:
                     <input type="email" name="email" placeholder="your email" class="box"
-                           value="<?php echo $details->getCustomerEmail(); ?>" required></label>
+                           value="<?php echo htmlspecialchars($details->getCustomerEmail()); ?>" required></label>
                 <input type="hidden" name="formStep" value="step1">
                 <div class="btn-left"><input type="submit" name="next" value="Next" class="btn btn-next"></div>
             </form>
@@ -90,7 +90,7 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
         <?php if ($formStep === 'step2') { ?>
             <form action="user_AppointmentPay.php" method="post">
                 <h3>make appointment</h3>
-                <div class="msg"><?php echo $msg; ?></div>
+                <div class="msg"><?php echo htmlspecialchars($msg); ?></div>
 
                 <input type="hidden" name="fname" value="<?php echo $_POST['fname']; ?>">
                 <input type="hidden" name="lname" value="<?php echo $_POST['lname']; ?>">
@@ -105,7 +105,7 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
                         <?php
                         $reportTypes = fetchReportTypesFromDatabase(); // Replace with your actual function
                         foreach ($reportTypes as $reportType) {
-                            echo "<option value='" . $reportType['id'] . "'>" . $reportType['name'] . "</option>";
+                            echo "<option value='" . htmlspecialchars($reportType['id']) . "'>" . htmlspecialchars($reportType['name']) . "</option>";
                         }
                         ?>
                     </select>
@@ -122,8 +122,7 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
                 </label>
                 <input type="hidden" name="formStep" value="step2">
                 <input type="submit" name="pay" value="Proceed for Payment" class="btn-red btn-proceed">
-                <div class="btn-left"><input type="button" id="back-button" name="back" value="Back"
-                                             class="btn btn-back"></div>
+                <div class="btn-left"><input type="button" id="back-button" name="back" value="Back" class="btn btn-back"></div>
             </form>
         <?php } ?>
     </div>
@@ -157,8 +156,14 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
         const selectedReport = this.value;
         const selectedPrice = reportPrices[selectedReport];
 
-        // Update the price displayed
-        priceSpan.textContent = selectedPrice.toFixed(2) + '/=';
+        // Check if the selected option is "default"
+        if (selectedReport === 'default') {
+            // Reset the price to 0.00
+            priceSpan.textContent = '0.00/=';
+        } else {
+            // Update the price displayed with the selected price
+            priceSpan.textContent = selectedPrice.toFixed(2) + '/=';
+        }
     });
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -1,24 +1,25 @@
 <?php
 // Include your database connection
-require_once 'dbh.php';
+use Classes\DbConnector;
+require 'vendor\autoload.php';
+
 
 function fetchReportTypesFromDatabase(): array
 {
-    global $conn;
-
+    $db = new DbConnector();
+    $conn = $db->getConnection();
     $query = "SELECT test_id, test_name, test_price FROM tests";
-    $result = $conn->query($query);
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
 
     $reportTypes = array();
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $reportTypes[] = array(
-                'id' => $row['test_id'],
-                'name' => $row['test_name'],
-                'price' => $row['test_price']
-            );
-        }
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $reportTypes[] = array(
+            'id' => $row['test_id'],
+            'name' => $row['test_name'],
+            'price' => $row['test_price']
+        );
     }
 
     return $reportTypes;

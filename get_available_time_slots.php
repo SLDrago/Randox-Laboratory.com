@@ -1,6 +1,10 @@
 <?php
 // Include your database connection
-require_once 'app/Config/dbh.php';
+use Classes\DbConnector;
+require 'vendor\autoload.php';
+
+$db = new DbConnector();
+$conn = $db->getConnection();
 
 if (isset($_GET['date'])) {
     $selectedDate = $_GET['date'];
@@ -8,9 +12,9 @@ if (isset($_GET['date'])) {
     // Fetch available time slots and their booking counts for the selected date
     $query = "SELECT appointment_time, COUNT(*) AS booked_slots FROM appointment WHERE appinment_date = ? GROUP BY appointment_time";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $selectedDate);
+    $stmt->bindParam(1, $selectedDate);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $timeSlots = array();
 
@@ -27,7 +31,7 @@ if (isset($_GET['date'])) {
     }
 
     // Update availability for booked time slots
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $timeSlot = intval($row['appointment_time']);
         if (array_key_exists($timeSlot, $timeSlots)) {
             $timeSlots[$timeSlot]['booked_slots'] = intval($row['booked_slots']);
@@ -40,7 +44,8 @@ if (isset($_GET['date'])) {
 }
 
 // Function to get time slot labels based on appointment_time values
-function getTimeSlotLabel($timeSlot) {
+function getTimeSlotLabel($timeSlot): string
+{
     switch ($timeSlot) {
         case 1:
             return '8.00 A.M - 10.00 A.M';

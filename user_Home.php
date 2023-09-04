@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="assets/css/webNavbar_style.css">
+    <link rel="stylesheet" href="assets/css/user_webNavbar_style.css">
     <link rel="stylesheet" href="assets/css/user_home_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
 <?php
-include 'app/Views/Common/webNavbar.php';
+include 'Common/webHeader.php';
 ?>
 <section class="home">
     <video class="video-slide active" src="assets/videos/video1.mp4"  autoplay muted loop></video>

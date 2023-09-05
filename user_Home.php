@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +34,7 @@ include 'Common/webHeader.php';
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
         Laboratories. </p>
 
-        <a href="#">Appoint Now</a>
+        <a href="user_Appointment.php">Appoint Now</a>
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
@@ -42,7 +45,7 @@ include 'Common/webHeader.php';
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
         Laboratories. </p>
-        <a href="#">Appoint Now</a>
+        <a href="user_Appointment.php">Appoint Now</a>
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
@@ -53,7 +56,7 @@ include 'Common/webHeader.php';
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
         Laboratories. </p>
-        <a href="#">Appoint Now</a>
+        <a href="user_Appointment.php">Appoint Now</a>
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
@@ -64,7 +67,7 @@ include 'Common/webHeader.php';
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
         Laboratories. </p>
-        <a href="#">Appoint Now</a>
+        <a href="user_Appointment.php">Appoint Now</a>
     </div>
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
@@ -75,7 +78,7 @@ include 'Common/webHeader.php';
         comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
         dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
         Laboratories. </p>
-        <a href="#">Appoint Now</a>
+        <a href="user_Appointment.php">Appoint Now</a>
     </div>
 
     <div class="media-icons">

@@ -13,7 +13,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 120px;
-    background-image: url("../../assets/images/Profile/profile_background.jpg");
+    background-color: #8bb9fe;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -22,19 +22,22 @@ body {
 
 .container {
     position: relative;
-    max-width: 550px;
+    max-width: 600px;
     width: 100%;
     background: #fff;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.849);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.849);
+    font-size: 1.25rem;
 }
 
 .container header {
-    font-size: 1.3rem;
+    font-size: 2.5rem;
     color: #333;
     font-weight: 500;
     text-align: center;
+    display: block;
+    padding: 20px 0;
 }
 
 .container .form {
@@ -44,6 +47,7 @@ body {
 .form .input-box {
     width: 100%;
     margin-top: 10px;
+    font-size: 1.25rem;
 }
 
 .input-box label {
@@ -63,20 +67,26 @@ body {
     padding: 0 15px;
 }
 
+.input-box input{
+    padding: 1rem;
+    font-size: 1rem;
+}
+
 .input-box input:focus {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 
 .card {
-    width: 200px; /* Adjust the width to your preference */
-    border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 50px;
-    background-color: white;
+    margin: 50px 50px;
+}
+
+.card img {
+    width: 70%;
+    height: auto;
 }
 
 .upload {
@@ -189,11 +199,11 @@ body {
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
-    background: rgb(113, 9, 9);
+    background: #df63ff;
 }
 
 .form button:hover {
-    background: rgb(176, 136, 24);
+    background: #8d29a6;
 }
 
 /*Responsive*/

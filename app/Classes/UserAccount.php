@@ -11,33 +11,34 @@ class UserAccount
 {
     private string $username;
     private string $password;
-    private $customerName;
-    private $customerBD;
-    private $customerNIC;
-    private $customerPNumber;
-    private $customerEmail;
+    private string $customerName;
+    private string $customerBD;
+    private string $customerNIC;
+    private string $customerPNumber;
+    private string $customerEmail;
+    private string $profilePic;
 
-    public function getCustomerName()
+    public function getCustomerName(): string
     {
         return $this->customerName;
     }
 
-    public function getCustomerBD()
+    public function getCustomerBD(): string
     {
         return $this->customerBD;
     }
 
-    public function getCustomerNIC()
+    public function getCustomerNIC(): string
     {
         return $this->customerNIC;
     }
 
-    public function getCustomerPNumber()
+    public function getCustomerPNumber(): string
     {
         return $this->customerPNumber;
     }
 
-    public function getCustomerEmail()
+    public function getCustomerEmail(): string
     {
         return $this->customerEmail;
     }
@@ -46,6 +47,13 @@ class UserAccount
     {
         return $this->username;
     }
+
+    public function getProfilePic(): string
+    {
+        return $this->profilePic;
+    }
+
+
 
     public function createRandomString($length): string
     {
@@ -71,7 +79,7 @@ class UserAccount
         return $this->password;
     }
 
-    public function addUser($conn,$name,$bd,$nic,$email,$pnumber,$username,$hashedpassword): bool
+    public function addUser(PDO $conn,$name,$bd,$nic,$email,$pnumber,$username,$hashedpassword): bool
     {
         try {
             $check = "SELECT * FROM customer WHERE customer_pnumber = ?";
@@ -79,28 +87,28 @@ class UserAccount
             $stmt->bindParam(1, $pnumber);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if (count($result) > 0) {
-                $query = "UPDATE customer SET customer_name = :customerName,customer_bd = :customerBd,customer_nic = :customerNIC,customer_email = :customerEmail, username = :userName, password = :HashedPassword WHERE customer_pnumber = :customerPNumber;";
-            } else {
+            if (!(count($result) > 0)) {
                 $query = "INSERT INTO customer (customer_name,customer_bd,customer_nic,customer_email,customer_pnumber,username,password) VALUES (:customerName,:customerBd,:customerNIC,:customerEmail,:customerPNumber,:userName,:HashedPassword);";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':customerName', $name);
+                $stmt->bindParam(':customerBd', $bd);
+                $stmt->bindParam(':customerNIC', $nic);
+                $stmt->bindParam(':customerEmail', $email);
+                $stmt->bindParam(':customerPNumber', $pnumber);
+                $stmt->bindParam(':userName', $username);
+                $stmt->bindParam(':HashedPassword', $hashedpassword);
+                $stmt->execute();
+                return True;
+            }else{
+                return True;
             }
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':customerName', $name);
-            $stmt->bindParam(':customerBd', $bd);
-            $stmt->bindParam(':customerNIC', $nic);
-            $stmt->bindParam(':customerEmail', $email);
-            $stmt->bindParam(':customerPNumber', $pnumber);
-            $stmt->bindParam(':userName', $username);
-            $stmt->bindParam(':HashedPassword', $hashedpassword);
-            $stmt->execute();
-            return True;
         }catch (PDOException $ex){
             error_log("Database error: " . $ex->getMessage());
             return false;
         }
     }
 
-    public function getCustomerID($conn,$pnumber)
+    public function getCustomerID(PDO $conn,$pnumber)
     {
         $customerId = null;
         try {
@@ -121,7 +129,7 @@ class UserAccount
         }
     }
 
-    public function getCustomerDataByAuthToken($conn,$authToken): ?UserAccount
+    public function getCustomerDataByAuthToken(PDO $conn,$authToken): ?UserAccount
     {
         $user = new UserAccount();
         try{
@@ -138,6 +146,7 @@ class UserAccount
                     $user->customerPNumber = $row['customer_pnumber'];
                     $user->customerEmail = $row['customer_email'];
                     $user->username = $row['username'];
+                    $user->profilePic = $row['profile_pic'];
                 }
             }
             return $user;
@@ -146,4 +155,67 @@ class UserAccount
             return null;
         }
     }
+
+    public function saveProfilePic(PDO $conn,$authToken,$role,$username,$oldPicName,$profilePic,$uploadPath): bool
+    {
+        $img_name = $profilePic['name'];
+        $tmp_name = $profilePic['tmp_name'];
+        $error = $profilePic['error'];
+
+        if ($error === 0) {
+            $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+            $img_ex_to_lc = strtolower($img_ex);
+            $allowed_exs = array('jpg', 'jpeg', 'png');
+
+            if (in_array($img_ex_to_lc, $allowed_exs)) {
+                $new_img_name = uniqid(str_replace(' ', '', $username), true) . '.' . $img_ex_to_lc;
+                $img_upload_path = $uploadPath. $new_img_name;
+
+                $defaultImageName = "default_profile.png";
+
+                if ($oldPicName != $defaultImageName){
+                    unlink("$uploadPath.$oldPicName");
+                }
+
+                // Move the uploaded file to the destination folder
+                if (move_uploaded_file($tmp_name, $img_upload_path)) {
+                    $query = "UPDATE $role SET profile_pic = ? WHERE auth_token = ?;";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bindParam(1, $new_img_name);
+                    $stmt->bindParam(2, $authToken);
+                    $stmt->execute();
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function updateUser(PDO $conn,$name,$bd,$email,$pnumber,$hashedpassword,$authToken)
+    {
+        try{
+            if($hashedpassword != null) {
+                $query = "UPDATE customer SET customer_name = :customerName,customer_bd = :customerBd,customer_email = :customerEmail, password = :HashedPassword WHERE auth_token = :authToken;";
+            }else{
+                $query = "UPDATE customer SET customer_name = :customerName,customer_bd = :customerBd,customer_pnumber = :customerPNumber,customer_email = :customerEmail WHERE auth_token = :authToken;";
+            }
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':customerName', $name);
+            $stmt->bindParam(':customerBd', $bd);
+            $stmt->bindParam(':customerEmail', $email);
+            $stmt->bindParam(':customerPNumber', $pnumber);
+            $stmt->bindParam(':HashedPassword', $hashedpassword);
+            $stmt->bindParam(':authToken', $authToken);
+            $stmt->execute();
+            return True;
+        }catch (PDOException){
+            return false;
+        }
+    }
+
 }

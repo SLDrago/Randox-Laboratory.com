@@ -32,12 +32,18 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
+    <link rel="stylesheet" href="assets/css/user_webNavbar_style.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
 
     <title>Appointment</title>
 </head>
 <body class="appointment-bg">
+<?php
+include 'Common/webHeader.php';
+?>
+<br>
+<br>
 
 <!-- Appointment Section -->
 <section class="appointment" id="appointment">

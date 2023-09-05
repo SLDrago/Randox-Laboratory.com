@@ -13,16 +13,6 @@ class Payment
     private string $return_url = "http://localhost:8080/Randox-Laboratory.com/user_AppointmentPay.php";
     private string $cancel_url  = "http://localhost:8080/Randox-Laboratory.com/user_AppointmentPay.php";
     private string $notify_url = "http://localhost:8080/Randox-Laboratory.com/success.php";
-    private $first_name;
-    private $last_name;
-    private $email;
-    private $phone;
-    private $address;
-    private $city;
-    private $country;
-    private $order_id;
-    private $items;
-    private $amount;
     private $hash;
 
     public function getMerchantId(): string

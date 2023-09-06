@@ -32,17 +32,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <title>Randox Login</title>
         <link rel="stylesheet" href=".css">
        <style>
-       /*  body {
-                background-image: url('assets/images/Profile/login.jpg');
+        body {
+                background-attachment: fixed;
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
+                background-image: url('https://img.freepik.com/free-vector/hand-drawn-international-nurses-day-background_23-2149341238.jpg?w=2000');
+
+
 
 
 
             }
 
-        /*    .container::before{
+         .container::before{
                 content: "";
                 position: absolute;
                 top: 0;
@@ -50,7 +53,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 width: 100%;
                 height: 110%;
                 z-index: -1;
-                background: white;
                 background-color: rgba(0, 0, 0, 0.4);
             }
 */
@@ -100,17 +102,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 border-radius: 5px;
                 margin:20px auto;
             }
+        .logo {
+
+
+            /* Initial styles for highlighting */
+            border: 4px solid transparent; /* Add a transparent border */
+            transition: border-color 0.3s, opacity 0.3s; /* Smooth transition effect */
+        }
+
+        .logo:hover {
+
+            opacity: 0.9; /* Reduce opacity slightly on hover (optional) */
+        }
+
+
 
 
         </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     </head>
-    <body>
+    <body style="background-color: #a7c8ff;">
     <img src="assets/images/logo/logo.png" alt="Logo" class="logo" >
+    <br><br><br><br>
     <div class="container d-flex justify-content-center align-items-center">
 
-        <form class="border shadow-lg p-3 rounded" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"  style="width: 600px;">
+        <form class="border shadow-lg p-3 rounded" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"  style="width: 600px;background-color: #ffffff;border: 10px solid black; padding: 20px;">
             <h3 class="text-center p-3">Sign In</h3>
             <hr>
             <?php if (isset($_GET['error'])) {

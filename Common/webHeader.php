@@ -34,7 +34,6 @@ $user = new UserAccount();
             <?php
             }else{
             $authToken = $_SESSION['AUTH_TOKEN'];
-            $data = new UserAccount();
             $data = $user->getCustomerDataByAuthToken($conn,$authToken);
             ?>
 
@@ -65,7 +64,7 @@ $user = new UserAccount();
                                 myDropdown.classList.remove('show');
                             }
                         }
-                    }
+                    };
                 </script>
 
 

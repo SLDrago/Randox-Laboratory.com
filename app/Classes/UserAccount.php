@@ -133,7 +133,7 @@ class UserAccount
     {
         $user = new UserAccount();
         try{
-            $query = "SELECT customer_name,customer_bd,customer_nic,customer_pnumber,customer_email,username FROM customer WHERE auth_token = ?;";
+            $query = "SELECT customer_name,customer_bd,customer_nic,customer_pnumber,customer_email,username,profile_pic FROM customer WHERE auth_token = ?;";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(1,$authToken);
             $stmt->execute();
@@ -158,9 +158,9 @@ class UserAccount
 
     public function saveProfilePic(PDO $conn,$authToken,$role,$username,$oldPicName,$profilePic,$uploadPath): bool
     {
-        $img_name = $profilePic['name'];
-        $tmp_name = $profilePic['tmp_name'];
-        $error = $profilePic['error'];
+        $img_name = $_FILES['profilepic']['name'];
+        $tmp_name = $_FILES['profilepic']['tmp_name'];
+        $error = $_FILES['profilepic']['error'];
 
         if ($error === 0) {
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
@@ -174,7 +174,7 @@ class UserAccount
                 $defaultImageName = "default_profile.png";
 
                 if ($oldPicName != $defaultImageName){
-                    unlink("$uploadPath.$oldPicName");
+                    unlink($uploadPath.$oldPicName);
                 }
 
                 // Move the uploaded file to the destination folder
@@ -196,26 +196,35 @@ class UserAccount
         }
     }
 
-    public function updateUser(PDO $conn,$name,$bd,$email,$pnumber,$hashedpassword,$authToken)
+    public function updateUser(PDO $conn, $name, $bd, $email, $pnumber, $hashedpassword, $authToken): bool
     {
-        try{
-            if($hashedpassword != null) {
-                $query = "UPDATE customer SET customer_name = :customerName,customer_bd = :customerBd,customer_email = :customerEmail, password = :HashedPassword WHERE auth_token = :authToken;";
-            }else{
-                $query = "UPDATE customer SET customer_name = :customerName,customer_bd = :customerBd,customer_pnumber = :customerPNumber,customer_email = :customerEmail WHERE auth_token = :authToken;";
+        try {
+            if (isset($hashedpassword)) {
+                $query = "UPDATE customer SET customer_name = :customerName, customer_bd = :customerBd, customer_pnumber = :customerPNumber, customer_email = :customerEmail, password = :HashedPassword WHERE auth_token = :authToken;";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':customerName', $name);
+                $stmt->bindParam(':customerBd', $bd);
+                $stmt->bindParam(':customerEmail', $email);
+                $stmt->bindParam(':customerPNumber', $pnumber);
+                $stmt->bindParam(':HashedPassword', $hashedpassword);
+                $stmt->bindParam(':authToken', $authToken);
+                $stmt->execute();
+            } else {
+                $query = "UPDATE customer SET customer_name = :customerName, customer_bd = :customerBd, customer_pnumber = :customerPNumber, customer_email = :customerEmail WHERE auth_token = :authToken;";
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':customerName', $name);
+                $stmt->bindParam(':customerBd', $bd);
+                $stmt->bindParam(':customerEmail', $email);
+                $stmt->bindParam(':customerPNumber', $pnumber);
+                $stmt->bindParam(':authToken', $authToken);
+                $stmt->execute();
             }
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':customerName', $name);
-            $stmt->bindParam(':customerBd', $bd);
-            $stmt->bindParam(':customerEmail', $email);
-            $stmt->bindParam(':customerPNumber', $pnumber);
-            $stmt->bindParam(':HashedPassword', $hashedpassword);
-            $stmt->bindParam(':authToken', $authToken);
-            $stmt->execute();
-            return True;
-        }catch (PDOException){
-            return false;
+            return true;
+        } catch (PDOException $ex) {
+            error_log("Database error: " . $ex->getMessage());
+            return $ex->getMessage();
         }
     }
+
 
 }

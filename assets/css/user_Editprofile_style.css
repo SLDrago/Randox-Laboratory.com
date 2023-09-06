@@ -136,6 +136,12 @@ body {
     cursor: pointer;
 }
 
+.msg {
+    display: block;
+    color: white;
+    background-color: #fd7e14;
+    text-align: center;
+}
 
 .form .column {
     display: flex;
@@ -189,7 +195,7 @@ body {
     font-size: 1rem;
 }
 
-.form button {
+.form #edit {
     height: 35px;
     width: 100%;
     color: #fff;
@@ -202,7 +208,7 @@ body {
     background: #df63ff;
 }
 
-.form button:hover {
+.form #edit:hover {
     background: #8d29a6;
 }
 

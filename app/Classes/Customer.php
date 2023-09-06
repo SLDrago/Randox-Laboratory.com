@@ -126,6 +126,40 @@ class Customer
             return false;
         }
     }
+
+    public function getOTPByUsername(PDO $conn,$username)
+    {
+        try {
+            $dbotp = '';
+            $query = "SELECT otp_code FROM customer WHERE username = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(1, $username);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $row) {
+                $dbotp = $row['otp_code'];
+            }
+            return $dbotp;
+        }catch (PDOException $e){
+            return null;
+        }
+    }
+
+    public function updatePassword(PDO $conn,$username,$hashedpass)
+    {
+        try{
+            $query = 'UPDATE customer SET password = ? WHERE username = ?';
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(1, $hashedpass);
+            $stmt->bindParam(2,$username);
+            $stmt->execute();
+            return true;
+        }catch (PDOException){
+            return false;
+        }
+
+
+    }
 }
 
 

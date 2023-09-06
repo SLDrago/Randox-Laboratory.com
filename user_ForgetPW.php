@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $message1 = "Randox Laboratory Badulla"."      ".$username . " your OTP " . $otp;
             // string | Text of the message. 320 chars max.
 
-            $to = "94778096452"; // string | Number to send the SMS. Better to use 9471XXXXXXX format.
+            $to = $data->getPhone(); // string | Number to send the SMS. Better to use 9471XXXXXXX format.
             $sender_id = "NotifyDEMO"; // string | This is the from name recipient will see as the sender of the SMS. Use \\\"NotifyDemo\\\" if you have not ordered your own sender ID yet.
             $contact_fname = ""; // string | Contact First Name - This will be used while saving the phone number in your Notify contacts (optional).
             $contact_lname = ""; // string | Contact Last Name - This will be used while saving the phone number in your Notify contacts (optional).
@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $customer->updateOTP($conn,$username,$otp);
             try {
                 $api_instance->sendSMS($user_id, $api_key, $message1, $to, $sender_id, $contact_fname, $contact_lname, $contact_email, $contact_address, $contact_group, $type);
-                header("location: confirm.php?username=$username");
+                header("location: user_confirm.php?username=$username");
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
@@ -42,20 +42,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 ?>
 <!doctype html>
-<html>
+
+
 <head>
     <meta charset="utf-8">
     <title>Forget Password</title>
    <style>
-/*body {
+
+body {
      background-image: url('https://img.freepik.com/free-vector/hand-drawn-international-nurses-day-background_23-2149341238.jpg?w=2000');
      background-size: cover;
      background-position: center;
      background-repeat: no-repeat;
+     background-attachment: fixed;
 
 
 
- }
+}
 
  .container::before{
      content: "";
@@ -65,9 +68,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
      width: 100%;
      height: 110%;
      z-index: -1;
-     background: white;
+
      background-color: rgba(0, 0, 0, 0.4);
- }*/
+ }
 
 
 
@@ -116,16 +119,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             margin:20px auto;
         }
 
+.logo {
+
+
+    /* Initial styles for highlighting */
+    border: 4px solid transparent; /* Add a transparent border */
+    transition: border-color 0.3s, opacity 0.3s; /* Smooth transition effect */
+}
+
+.logo:hover {
+
+    opacity: 0.9; /* Reduce opacity slightly on hover (optional) */
+}
+
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: #a7c8ff;">
 <img src="assets/images/logo/logo.png" alt="Logo" class="logo">
+<br><br><br><br>
 <div class="container d-flex justify-content-center align-items-center">
 
-    <form class="border shadow-lg p-3 rounded" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"  style="width: 600px;">
+    <form class="border-4 shadow-lg p-3 rounded" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"  style="width: 600px;background-color: #ffffff; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
         <h2 class="text-center p-3">Forgot Password</h2><br>
         <div class="mb-3 d-flex align-items-center">
             <i class="fa fa-user" aria-hidden="true" style="font-size: 30px; margin-right: 20px;"></i>

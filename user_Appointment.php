@@ -8,10 +8,18 @@ require_once 'vendor/autoload.php';
 include 'app/Config/priceList.php';
 
 $msg = '';
+$nic = '';
+$bd = '';
+$phone = '';
+$email = '';
 
 if (isset($_GET['msg'])) {
     $msg = $_GET['msg'];
 }
+if (isset($_GET['order_id'])) {
+    $msg = "Your Payment is Processed! Appointment ID:".$_GET['order_id'];
+}
+
 $db = new DbConnector();
 $user = new UserAccount();
 $conn = $db->getConnection();
@@ -21,6 +29,10 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
     $authToken = $_SESSION['AUTH_TOKEN'];
     $details = $user->getCustomerDataByAuthToken($conn, $authToken);
     $name = explode(" ", $details->getCustomerName());
+    $nic = $details->getCustomerNIC();
+    $bd = $details->getCustomerBD();
+    $phone = $details->getCustomerPNumber();
+    $email = $details->getCustomerEmail();
 }
 
 ?>
@@ -78,16 +90,16 @@ include 'Common/webHeader.php';
                            value="<?php echo htmlspecialchars($name[1] ?? ''); ?>" required></label>
                 <label>N.I.C:
                     <input type="text" name="nic" placeholder="Your NIC" class="box"
-                           value="<?php echo htmlspecialchars($details->getCustomerNIC()); ?>" required></label>
+                           value="<?php echo htmlspecialchars($nic ?? ''); ?>" required></label>
                 <label>Birthday:
                     <input type="date" name="bd" placeholder="Your Birthday" class="box"
-                           value="<?php echo htmlspecialchars($details->getCustomerBD()); ?>" required></label>
+                           value="<?php echo htmlspecialchars($bd ?? ''); ?>" required></label>
                 <label>Phone No:
-                    <input type="text" name="number" placeholder="your Phone-number" class="box"
-                           value="<?php echo htmlspecialchars($details->getCustomerPNumber()); ?>" required></label>
+                    <input type="text" name="number" placeholder="Phone-Number[use 9471XXXXXXX format]" class="box"
+                           value="<?php echo htmlspecialchars($phone ?? ''); ?>" required></label>
                 <label>Email:
                     <input type="email" name="email" placeholder="your email" class="box"
-                           value="<?php echo htmlspecialchars($details->getCustomerEmail()); ?>" required></label>
+                           value="<?php echo htmlspecialchars($email ?? ''); ?>" required></label>
                 <input type="hidden" name="formStep" value="step1">
                 <div class="btn-left"><input type="submit" name="next" value="Next" class="btn btn-next"></div>
             </form>

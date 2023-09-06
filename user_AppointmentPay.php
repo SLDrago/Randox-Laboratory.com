@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'app/Config/priceList.php';
 $reportTypes = fetchReportTypesFromDatabase();
 
@@ -12,13 +13,23 @@ if (isset($_POST['pay'])) {
         $lname = $_POST['lname'];
         $nic = $_POST['nic'];
         $bd = $_POST['bd'];
-        $pnumber = $_POST['pnumber'];
+
+        $pattern = '/^94\d{9}$/';
+
+        if (preg_match($pattern, $_POST['pnumber'])) {
+            $pnumber = $_POST['pnumber'];
+        } else {
+            header("location: user_Appointment.php?msg=Enter a Valid Phone Number");
+            die();
+        }
+
         if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $email = $_POST['email'];
         } else {
             header("location: user_Appointment.php?msg=Enter a Valid Email");
             die();
         }
+
         $reporttype = $_POST['reporttype'];
         $date = $_POST['appointDate'];
         $timeslot = $_POST['timeslot'];
@@ -210,7 +221,6 @@ if (isset($_POST['pay'])) {
             xhttp.send();
         }
     </script>
-
     </body>
     </html>
 <?php

@@ -81,7 +81,7 @@ class Customer
             $stmt = $conn->prepare($query);
 
             // Bind the new token and username to the placeholders
-            $stmt->bindParam(':authToken', $token);
+            $stmt->bindParam(':authToken', $authToken);
             $stmt->bindParam(':username', $username);
 
             // Execute the prepared statement

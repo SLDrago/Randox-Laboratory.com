@@ -27,12 +27,21 @@ include 'Common/webHeader.php';
 
         <h1>Randox<br><span>Laboratories</span></h1>
 
-        <h3>Your Health. Our Commitment.</h3><br><br>
-        <p>
-        Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
-        comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
-        dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
-        Laboratories. </p>
+        <h3><b>Welcome to Randox Laboratory - Badulla</b></h3><br><br>
+        <p>At Randox Laboratory in Badulla, we are dedicated to providing you with accurate and timely medical laboratory services.
+            With a commitment to excellence and a focus on your well-being, we offer a comprehensive range of diagnostic tests,
+            ensuring that you receive the information you need to make informed decisions about your health.</p>
+
+        <a href="user_Appointment.php">Appoint Now</a>
+    </div>
+    <div class="content">
+        <h1>Randox<br><span>Laboratories</span></h1>
+
+        <h3>Our Services.</h3><br><br>
+        <p><b>Blood Tests:</b><br>From basic screenings to advanced profiles, our cutting-edge facility conducts a wide range of blood tests.<br>
+            <b>Urine Analysis:</b><br>We provide comprehensive urine analysis services to identify various health.<br>
+            <b>Lipid Profile:</b><br>We provide comprehensive Cholestorel analysis services.<br>
+            <b>Diagnostic Panels:</b><br>Our lab is equipped to perform diagnostic panels that encompass a variety of health markers. </p>
 
         <a href="user_Appointment.php">Appoint Now</a>
     </div>
@@ -50,23 +59,10 @@ include 'Common/webHeader.php';
     <div class="content">
         <h1>Randox<br><span>Laboratories</span></h1>
 
-        <h3>Your Health. Our Commitment.</h3><br><br>
-        <p>
-        Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
-        comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
-        dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
-        Laboratories. </p>
-        <a href="user_Appointment.php">Appoint Now</a>
-    </div>
-    <div class="content">
-        <h1>Randox<br><span>Laboratories</span></h1>
-
-        <h3>Your Health. Our Commitment.</h3><br><br>
-        <p>
-        Welcome to Randox Laboratories, your trusted partner in healthcare. Experience precision and care with our
-        comprehensive urine tests, full blood reports, and more. Your well-being is our top priority, and we're
-        dedicated to providing accurate results, promptly. Discover the essence of reliable diagnostics at Randox
-        Laboratories. </p>
+        <h3> Convenience.</h3><br><br>
+        <p>We understand that your time is valuable, which is why we prioritize efficiency and convenience.
+            Our online platform allows you to schedule appointments, access your reports securely,
+            and receive notifications when your results are ready. </p>
         <a href="user_Appointment.php">Appoint Now</a>
     </div>
     <div class="content">

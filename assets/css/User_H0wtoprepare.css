@@ -1,0 +1,137 @@
+body {
+
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #a7c8ff;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+
+}
+header{
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 200px;
+    transition: 0.5s ease;
+
+}
+header .brand{
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+
+}
+
+header .navigation{
+    position: relative;
+
+}
+
+header .navigation .navigation-items a{
+    position: relative;
+    color:#000D4D;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 27px;
+    transition: 0.3s ease;
+
+}
+
+header .navigation .navigation-items .nav-link:hover {
+    background: #ffa500;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+header .navigation .navigation-items a button{
+    padding: 5px 25px;
+    border-radius: 25px;
+    background-color: #000D4D;
+    border: none;
+    color: #fff;
+}
+
+header .navigation .navigation-items a button:hover{
+    background-color: #ffa500;
+    padding: 6px 27px;
+}
+
+
+header .navigation .navigation-items a::before{
+    content: '';
+    position: absolute;
+    background: #fff;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s ease;
+}
+header.navigation .navigation-items a:hover:before{
+    width: 100%;
+
+}
+
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+.nav-links li {
+    display: inline;
+    margin-left: 10px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+}
+
+
+.image-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 25px 30px; /* we can Adjust the top and bottom padding */
+    background-color: rgba(255, 255, 255, 0.8); /* Background color for the description */
+}
+
+
+
+.side-image {
+    max-width: 43%;
+    height: auto;
+
+    padding-block: inherit;
+    padding: 30px 100px 30px 200px;
+}
+
+.image-description {
+    width: 50%; /* we Adjust the description width as needed */
+    padding: 20px;
+
+}
+
+.image-description h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.image-description p {
+    font-size: 1rem;
+}

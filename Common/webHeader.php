@@ -12,7 +12,7 @@ $user = new UserAccount();
 
 ?>
 <header>
-    <a href="#" class="brand"> <img src="../assets/images/logo/logo.png" alt="Logo" width="250px" height="70px"></a>
+    <a href="#" class="brand"> <img src="assets/images/logo/logo.png" alt="Logo" width="250px" height="70px"></a>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="menu-btn">
 
@@ -23,8 +23,8 @@ $user = new UserAccount();
             <a href="user_home.php" class="nav-link"><b>Home</b></a>
             <a href="#" class="nav-link"><b>How to prepare</b></a>
             <a href="user_Appointment.php" class="nav-link"><b>Appointment</b></a>
-            <a href="#" class="nav-link"><b>Download</b></a>
-            <a href="#" class="nav-link"><b>Contact us</b></a>
+            <a href="user_Reportdownload.php" class="nav-link"><b>Download</b></a>
+            <a href="user_ContactUs.php" class="nav-link"><b>Contact us</b></a>
             <?php
             if (!isset($_SESSION['AUTH_TOKEN'])) {
                 ?>

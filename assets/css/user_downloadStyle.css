@@ -1,0 +1,151 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+.responsive-table {
+    width: auto;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.responsive-table th, .responsive-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+
+.responsive-table th {
+    font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .responsive-table {
+        display: block;
+    }
+
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tbody tr {
+        margin-bottom: 10px;
+        display: block;
+        border: 1px solid #ddd;
+    }
+
+    .responsive-table tbody td {
+        text-align: left;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+}
+th,td{
+    padding: 1rem;
+    height: 50px;
+    vertical-align: center;
+    border:1px solid black;
+    align-items: center;
+
+
+}
+
+/*
+*{
+    margin: 0;
+    padding: 0;
+    font-family:arial, sans-serif;
+}
+
+body{
+    background: url(lab.jpg)center / cover;
+    
+}
+.heading{
+    display: flex;
+    background-color: #232f3e;
+    box-shadow: 0px,1px,2px #232f3e;
+    
+}
+.h1{
+    color: coral;
+    font-weight: bold;
+    font-family: arial, sans-serif;
+    background: transparent;
+    padding: 7px;
+}
+table{
+    border: 2px solid black;
+    
+}
+/*
+th{
+   /* position: sticky;*/
+/*  top: 0px;
+}
+.table-wrapper{
+  max-height: 500px;
+  overflow: scroll;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+main.table{
+    width: 82vw;
+    height: 90vh;
+    background-color: #fff5;
+    backdrop-filter:blur(7px);
+    box-shadow: 0.4 rem .8rem #0005;
+    border-radius: 8rem;
+    overflow: hidden;
+    align-items: center;
+
+}
+.table_header{
+    width: 75%;
+    height: 10%;
+    background-color: #fff4;
+    padding: 8rem 1rem;
+    align-items: center;
+}
+.table_body{
+    width:95%;
+    max-height:clac(89% - .8rem);
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: 6rem;
+    overflow: auto;
+    
+}
+.table_body::webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+.table_body::webkit-scrollbar-thumb{
+    border-radius: 5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+*/

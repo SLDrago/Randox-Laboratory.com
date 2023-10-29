@@ -42,8 +42,8 @@ if (isset($_SESSION['AUTH_TOKEN'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/user_appointment_style.css">
     <link rel="stylesheet" href="assets/css/user_webNavbar_style.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
@@ -65,7 +65,7 @@ include 'Common/webHeader.php';
     <div class="row">
 
         <div class="image">
-            <img src="/assets/images/appointment/appointment-img.svg" alt="">
+            <img src="assets/images/appointment/appointment-img.svg" alt="">
         </div>
         <?php
         $formStep = $_POST['formStep'] ?? 'step1';

@@ -12,25 +12,10 @@
     </style>
 </head>
 <body style="background-color: #a7c8ff;">
-<header>
-    <a href="#" class="brand"> <img src="assets/images/logo/logo.png" alt="Logo" width="250px" height="70px"></a>
+<?php
+include 'Common/webHeader.php';
+?>
 
-    <div class="menu-btn">
-
-    </div>
-    <div class="navigation">
-        <div class="navigation-items">
-
-            <a href="#" class="nav-link"><b>Home</b></a>
-            <a href="#" class="nav-link"><b>How to prepare</b></a>
-            <a href="#" class="nav-link"><b>Appointment</b></a>
-            <a href="#" class="nav-link"><b>Download</b></a>
-            <a href="#" class="nav-link"><b>Contact us</b></a>
-            <a href="#"><button><b>Login</button></b></a>
-
-        </div>
-    </div>
-</header>
 
 <hr>
 <div class="image-section">

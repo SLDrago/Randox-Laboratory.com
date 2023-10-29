@@ -9,7 +9,7 @@
     <title>RECEPTIONIST</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="receptionist_login.css" type="text/css" rel="stylesheet">
+    <link href="assets/css/receptionist_login.css" type="text/css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 
 
@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" class="nav1">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="Receptionist.php"><b>HOME</b></a>
+                        <a class="nav-link" aria-current="page" href="Receptionist_Dashboard.php"><b>HOME</b></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="receptionist_appointment.php"><b>APPOINTMENTS</b></a>
@@ -48,9 +48,9 @@
                             <b>TESTS</b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="pricing.php"><b>PRICING</b></a></li>
+                            <li><a class="dropdown-item" href="Receptionist_pricing.php"><b>PRICING</b></a></li>
                             <li>
-                            <li><a class="dropdown-item" href="prepare.php"><b>HOW TO PREPARE</b></a></li>
+                            <li><a class="dropdown-item" href="Receptionist_prepare.php"><b>HOW TO PREPARE</b></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

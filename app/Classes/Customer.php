@@ -40,6 +40,7 @@ class Customer
     public function authenticate($inputUsername, $inputPassword, PDO $pdo)
     {
         try {
+            $hashedpw = null;
             // Prepare the SQL statement with placeholders
             $query = "SELECT password FROM customer WHERE username = :username;";
             $stmt = $pdo->prepare($query);

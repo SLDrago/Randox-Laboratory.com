@@ -126,8 +126,8 @@ if (isset($_POST['pay'])) {
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/user_appointment_style.css">
         <title>Payment</title>
     </head>
     <body>
@@ -136,7 +136,7 @@ if (isset($_POST['pay'])) {
         <div class="row">
 
             <div class="image">
-                <img src="/assets/images/appointment/appointment-img.svg" alt="">
+                <img src="assets/images/appointment/appointment-img.svg" alt="">
             </div>
 
 
@@ -234,8 +234,8 @@ if (isset($_GET['order_id'])) {
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/user_appointment_style.css">
         <title>Payment Done!</title>
     </head>
     <body>

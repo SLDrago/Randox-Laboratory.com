@@ -1,6 +1,5 @@
 body {
 
-    display: inline-block;
     height: 100vh;
     font-family: Arial, sans-serif;
     background-image: url("https://i.pinimg.com/1200x/1a/ee/5c/1aee5c344846f449350feae457ea350e.jpg");
@@ -11,14 +10,12 @@ body {
 .nav-item {
     font-size: 24px;
     float: left;
-    margin: 28px;
-
-
+    margin: 15px;
 }
 
 
-.nav1 {
-    background-color: #007BFF;
+.nav {
+    flex-direction: row-reverse;
 }
 
 
@@ -115,7 +112,7 @@ button:hover {
 }
 
 .header {
-    background-color: #007BFF;
+    background-color: #000242;
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -130,12 +127,12 @@ button:hover {
 
 .card {
     background-color: #fff;
-    border: 2px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     padding: 20px;
     width: calc(50% - 20px);
     margin-bottom: 20px;
+    border-right: #fd7e14 20px solid !important;
 }
 
 .card h2 {
@@ -143,6 +140,11 @@ button:hover {
     font-size: 20px;
     margin-bottom: 20px;
     font-weight: bold;
+}
+
+.card h1 {
+    font-weight: bolder;
+    font-style: italic;
 }
 
 ul {
@@ -164,10 +166,7 @@ ul {
 
 .reports {
     background-color: #fff;
-    max-width: 50%;
-    width: 50%;
     padding: 15px;
-    float: right;
     border: 3px solid black;
 }
 
@@ -175,7 +174,11 @@ ul {
     margin-bottom: 20px;
 }
 
-
+@media (max-width: 980px) {
+    .nav {
+        flex-direction: initial;
+    }
+}
 
 @media (max-width: 768px) {
     .reports {

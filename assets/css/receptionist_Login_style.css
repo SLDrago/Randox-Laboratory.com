@@ -1,24 +1,21 @@
 body {
 
-    display: inline-block;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    background-image: url("https://i.pinimg.com/1200x/1a/ee/5c/1aee5c344846f449350feae457ea350e.jpg");
-
+    font-family: Tahoma, sans-serif !important;
+    width: auto;
 
 }
 
 .nav-item {
     font-size: 24px;
     float: left;
-    margin: 28px;
+    margin: 15px;
 
 
 }
 
 
-.nav1 {
-    background-color: #007BFF;
+.nav {
+    flex-direction: row-reverse;
 }
 
 .container {
@@ -26,6 +23,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-wrap: wrap;
 
 }
 

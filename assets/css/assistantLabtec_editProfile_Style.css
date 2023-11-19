@@ -1,0 +1,140 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 75px;
+    background-color: rgb(200, 221, 242);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: blur(5);
+}
+
+.container {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.849);
+    font-size: 1.25rem;
+}
+
+.container header {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+    display: block;
+    padding: 0;
+}
+
+.container .form {
+    margin-top: 30px;
+}
+
+.form .input-box {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.input-box label {
+    color: #000000;
+}
+
+.form :where(.input-box input, .select-box) {
+    position: relative;
+    height: 30px;
+    width: 100%;
+    outline: none;
+    font-size: 0.7rem;
+    color: #707070;
+    margin-top: 2px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+.input-box input{
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+.input-box input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border-radius: 5px;
+    padding: 0px;
+    text-align: center;
+    margin: 0px;
+}
+
+.card img {
+    width: 50%;
+    height: auto;
+}
+
+div.card {
+    margin-left: -200px;
+    margin-right: -100px;
+}
+
+.form .column {
+    display: flex;
+    column-gap: 15px;
+}
+
+#edit {
+    height: 35px;
+    width: 100%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #639aff;
+}
+
+#edit:hover {
+    background: #2989a6;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .input-group {
+        flex-direction: row;
+    }
+
+    label {
+        margin-right: 10px;
+    }
+
+    input {
+        width: 50%;
+    }
+}

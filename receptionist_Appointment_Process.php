@@ -3,13 +3,14 @@
 use Classes\Appointment;
 use Classes\DbConnector;
 use Classes\UserAccount;
-use JetBrains\PhpStorm\NoReturn;
+use Classes\SMS;
 
 require_once 'vendor/autoload.php';
 
 $db = new DbConnector();
 $appointment = new Appointment();
 $user = new UserAccount();
+$sms = new SMS();
 $conn = $db->getConnection();
 
 if ($_POST['fname'] != '' && $_POST['bd'] != '' && $_POST['number'] != '' && $_POST['appointDate'] != '' && $_POST['timeslot'] != '') {
@@ -59,9 +60,15 @@ if ($_POST['fname'] != '' && $_POST['bd'] != '' && $_POST['number'] != '' && $_P
 
         if (isset($_POST['proceedPayment'])) {
             $appointment->addAppointmentEntry($conn, $appointmentId, $paymentId, $customerId, $reportType, $date, $timeSlot);
+            $phone=$appointment->getCustomerPhoneByAppointmentId($conn,$appointmentId);
+            $time=$appointment->getAppointmentTimeByAppointmentSlotId($timeSlot);
+            $sms->sendSMS($phone,"Your Appointment scheduled Successfully! Appointment No.:$appointmentId Appointment Date: $date Appointment Time: $time   - Randox-Laboratory");
             proceedPayment($appointmentId);
         } elseif (isset($_POST['skipPayment'])) {
             $appointment->addAppointmentEntry($conn, $appointmentId, $paymentId, $customerId, $reportType, $date, $timeSlot);
+            $phone=$appointment->getCustomerPhoneByAppointmentId($conn,$appointmentId);
+            $time=$appointment->getAppointmentTimeByAppointmentSlotId($timeSlot);
+            $sms->sendSMS($phone,"Your Appointment scheduled Successfully! Appointment No.:$appointmentId Appointment Date: $date Appointment Time: $time   - Randox-Laboratory");
             returnAppointment();
         }
     } else {

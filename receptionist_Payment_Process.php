@@ -2,12 +2,16 @@
 use Classes\Payment;
 use Classes\DbConnector;
 use Classes\Appointment;
+use Classes\SMS;
+use Classes\UserAccount;
 
 require_once 'vendor/autoload.php';
 
 $db = new DbConnector();
 $payment = new Payment();
 $appointment = new Appointment();
+$sms = new SMS();
+$user = new UserAccount();
 
 $conn = $db->getConnection();
 
@@ -26,7 +30,14 @@ if (isset($_POST['pay'])){
     $payment->addPaymentEntry($conn, $customerId, $appointmentId, $currentDate, $currentTime, $price);
     $paymentId = $payment->getPaymentID($conn,$appointmentId);
     $appointment->updatePaymentId($conn, $appointmentId, $paymentId);
-
+    $userData=$user->getTemporaryUserData($conn, $customerId);
+    if (isset($userData)){
+        $phone=$appointment->getCustomerPhoneByAppointmentId($conn,$appointmentId);
+        $username = $userData['username'];
+        $password = $userData['password'];
+        $sms->sendSMS($phone, "Your login credentials, Username: $username Password: $password ");
+        $user->deleteTemporarySaveUserData($conn, $customerId);
+    }
     header('location: receptionist_Payment.php?msg=Payment Successful!');
     die();
 }else{

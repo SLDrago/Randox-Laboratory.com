@@ -29,10 +29,6 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><b>REPORTS</b></a>
-                    </li>
-
-                    <li class="nav-item">
                         <a class="nav-link" href="receptionist_Payment.php"><b>PAYMENTS</b></a>
                     </li>
 

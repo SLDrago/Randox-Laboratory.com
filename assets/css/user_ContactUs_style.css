@@ -14,7 +14,7 @@ body{
     width: 100%;
 }
 .container {
-    content: "";
+    /*content: "";*/
     position: absolute;
     top: 0;
     left: 0;

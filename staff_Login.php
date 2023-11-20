@@ -86,7 +86,7 @@ if (isset($_POST['login'])){
                 </div>
 
                 <div class="forget-password mt-3">
-                    <a href="#">Forgot your password?</a>
+                    <a href="Staff_ForgetPassword.php">Forgot your password?</a>
                 </div>
                 <br>
                 <div class="d-grid">

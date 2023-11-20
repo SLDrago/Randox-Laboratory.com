@@ -4,6 +4,7 @@ use Classes\DbConnector;
 use Classes\Appointment;
 use Classes\SMS;
 use Classes\UserAccount;
+use Classes\Mail;
 
 require_once 'vendor/autoload.php';
 
@@ -12,6 +13,7 @@ $payment = new Payment();
 $appointment = new Appointment();
 $sms = new SMS();
 $user = new UserAccount();
+$mail = new Mail();
 
 $conn = $db->getConnection();
 
@@ -33,9 +35,15 @@ if (isset($_POST['pay'])){
     $userData=$user->getTemporaryUserData($conn, $customerId);
     if (isset($userData)){
         $phone=$appointment->getCustomerPhoneByAppointmentId($conn,$appointmentId);
+        $customerEmail=$appointment->getCustomerEmailByAppointmentId($conn,$appointmentId);
         $username = $userData['username'];
         $password = $userData['password'];
-        $sms->sendSMS($phone, "Your login credentials, Username: $username Password: $password ");
+        if(isset($customerEmail)){
+            $mail->sendMail($customerEmail, "Your login credentials - Randox-Laboratory.com","Your login credentials,<br><br> <b>Username:</b> $username <br> <b>Password:</b> $password ");
+        }
+        if(isset($phone)){
+            $sms->sendSMS($phone, "Your login credentials, Username: $username Password: $password ");
+        }
         $user->deleteTemporarySaveUserData($conn, $customerId);
     }
     header('location: receptionist_Payment.php?msg=Payment Successful!');

@@ -188,5 +188,18 @@ class Appointment
         }
     }
 
+    public function getCustomerEmailByAppointmentId(PDO $conn, $appointmentId)
+    {
+        try {
+            $sql="SELECT customer_email as email FROM customer INNER JOIN appointment a on a.customer_id = customer.customer_id WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
+        }
+    }
+
 
 }

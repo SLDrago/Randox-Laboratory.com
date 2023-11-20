@@ -3,6 +3,8 @@ session_start();
 
 use Classes\Receptionist;
 use Classes\DbConnector;
+use Classes\Labtechnician;
+
 require_once 'vendor\autoload.php';
 
 $msg = null;
@@ -14,14 +16,25 @@ if (isset($_POST['login'])){
     $db = new DbConnector();
     $conn = $db->getConnection();
     $re = new Receptionist();
+    $labTec = new Labtechnician();
 
     if (ctype_alpha($uname)){
         if ($re->verifyAdmin($uname,$pass,$conn)){
             $_SESSION['Admin'] = $uname;
             header("location: receptionist_Dashboard.php?uname=$uname");
             die();
-        }else{
-            $msg = "<div class='bg-warning text-center mx-1'>Username or Password Invalid</div>";
+        }elseif ($re->verifyReceptionist($uname,$pass,$conn)){
+            $_SESSION['Admin'] = $uname;
+            header("location: receptionist_Dashboard.php?uname=$uname");
+            die();
+        }elseif ($labTec->verifyLabTech($uname,$pass,$conn) == "senior"){
+            $_SESSION['Labtec'] = $uname;
+            header("location: seniorLabTech_Dashboard.php");
+            die();
+        }elseif ($labTec->verifyLabTech($uname,$pass,$conn) == "junior") {
+            $_SESSION['Labtec'] = $uname;
+            header("location: juniorLabTech_Dashboard.php");
+            die();
         }
     }else{
         $msg = "<div class='bg-warning text-center mx-1'>Username or Password Invalid</div>";
@@ -37,7 +50,7 @@ if (isset($_POST['login'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Randox-Laboratory | Admin Login </title>
+    <title>Randox-Laboratory | Staff Login</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/receptionist_Login_style.css" type="text/css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
@@ -57,7 +70,7 @@ if (isset($_POST['login'])){
 
     <div class="col-md-6">
         <div class="login-box">
-            <h2 class="header">Admin Login</h2>
+            <h2 class="header">Staff Login</h2>
             <?php echo $msg; ?>
             <br>
             <form action="" method="post">

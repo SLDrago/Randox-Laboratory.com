@@ -15,7 +15,7 @@ class Labtechnician
             $stmt->bindParam(':username', $uname);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            $hashedpw = $result['admin_password'];
+            $hashedpw = $result['labtec_password'];
             if(password_verify($pass, $hashedpw)){
                 return $result['labtec_role'];
             }else{

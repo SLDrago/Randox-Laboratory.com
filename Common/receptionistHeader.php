@@ -29,10 +29,6 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><b>REPORTS</b></a>
-                    </li>
-
-                    <li class="nav-item">
                         <a class="nav-link" href="receptionist_Payment.php"><b>PAYMENTS</b></a>
                     </li>
 
@@ -48,11 +44,9 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="receptionist_Logout.php"><b><i class="bi bi-box-arrow-left"></i> &nbsp;LOGOUT</b></a></li>
+                            <li><a class="dropdown-item" href="staff_Logout.php"><b><i class="bi bi-box-arrow-left"></i> &nbsp;LOGOUT</b></a></li>
                         </ul>
                     </li>
-
-
                 </ul>
             </div>
         </nav>

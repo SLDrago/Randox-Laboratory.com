@@ -254,5 +254,18 @@ class UserAccount
         }
     }
 
+    public function getTemporaryUserData(PDO $conn, $customerId)
+    {
+        try {
+            $sql="SELECT * FROM tempory_u_data WHERE customer_id = :customerId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":customerId", $customerId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
+        }
+    }
+
 
 }

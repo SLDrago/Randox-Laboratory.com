@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-use Classes\{DbConnector, UserAccount};
+use Classes\{DbConnector, UserAccount, Appointment, SMS, Mail};
 
 require_once 'vendor/autoload.php';
 
@@ -13,17 +13,43 @@ $bd = '';
 $phone = '';
 $email = '';
 
+$db = new DbConnector();
+$appointment = new Appointment();
+$user = new UserAccount();
+$conn = $db->getConnection();
+$details = new UserAccount();
+$sms = new SMS();
+$mail = new Mail();
+
 if (isset($_GET['msg'])) {
     $msg = $_GET['msg'];
 }
 if (isset($_GET['order_id'])) {
-    $msg = "Your Payment is Processed! Appointment ID:".$_GET['order_id'];
+    $appointmentId = $_GET['order_id'];
+    $phone=$appointment->getCustomerPhoneByAppointmentId($conn,$appointmentId);
+    $customerEmail=$appointment->getCustomerEmailByAppointmentId($conn,$appointmentId);
+    $appointmentData = $appointment->getAppointmentInfoById($conn,$appointmentId);
+    $timeSlot = $appointmentData['appointment_time'];
+    $date = $appointmentData['date'];
+    $customerId = $appointmentData['customer_id'];
+    $time=$appointment->getAppointmentTimeByAppointmentSlotId($timeSlot);
+    $sms->sendSMS($phone,"Your Appointment scheduled Successfully! Appointment No.:$appointmentId Appointment Date: $date Appointment Time: $time   - Randox-Laboratory");
+    $userData=$user->getTemporaryUserData($conn, $customerId);
+    if (isset($userData)){
+        $username = $userData['username'];
+        $password = $userData['password'];
+        if(isset($customerEmail)){
+            $mail->sendMail($customerEmail, "Your login credentials - Randox-Laboratory.com","Your login credentials,<br><br> <b>Username:</b> $username <br> <b>Password:</b> $password ");
+        }
+        if(isset($phone)){
+            $sms->sendSMS($phone, "Your login credentials, Username: $username Password: $password ");
+        }
+
+        $user->deleteTemporarySaveUserData($conn, $customerId);
+    }
 }
 
-$db = new DbConnector();
-$user = new UserAccount();
-$conn = $db->getConnection();
-$details = new UserAccount();
+
 
 if (isset($_SESSION['AUTH_TOKEN'])) {
     $authToken = $_SESSION['AUTH_TOKEN'];

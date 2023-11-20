@@ -28,10 +28,10 @@ $db =  new DbConnector();
 $conn = $db->getConnection();
 
 if (($local_md5sig === $md5sig) AND ($status_code == 2) ) {
-    $query = "UPDATE payment SET status=1 WHERE appointment_id = ?";
+    /*$query = "UPDATE payment SET status=1 WHERE appointment_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1,$order_id);
-    $stmt->execute();
+    $stmt->execute();*/
     $mail = new Mail();
     $result = $mail->sendMail("dilshanoshada7@gmail.com", "payment success", "<html lang='en'><body><h1>Success: $order_id</h1></body></html>");
 }

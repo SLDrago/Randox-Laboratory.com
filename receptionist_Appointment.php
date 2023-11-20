@@ -172,7 +172,11 @@ if (isset($_GET['msg'])) {
                         </tr>
                 <?php
                     }else{
+                        $currentDateTime = new DateTime('now');
+                        $currentDate = $currentDateTime->format('Y-m-d');
                     foreach ($result as $row){
+                        $appointmentDate = $row['date'];
+                        if ($appointmentDate>=$currentDate){
                 ?>
                 <tr>
                     <td class="<?php if ($row['payment_id'] == 0){ echo "text-danger"; } ?>"><?php echo $row['date']." : ".getTimeSlotLabel($row['appointment_time']); ?></td>
@@ -229,7 +233,7 @@ if (isset($_GET['msg'])) {
                             </div>
                         </div>
                 <?php
-                    }}
+                        }}}
                 ?>
                 </tbody>
             </table>

@@ -161,4 +161,45 @@ class Appointment
         }
     }
 
+    public function getCustomerPhoneByAppointmentId(PDO $conn, $appointmentId)
+    {
+        try {
+            $sql="SELECT customer_pnumber as phone FROM customer INNER JOIN appointment a on a.customer_id = customer.customer_id WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
+        }
+    }
+
+    public function getAppointmentTimeByAppointmentSlotId($timeSlot): string
+    {
+        switch ($timeSlot) {
+            case "1":
+                return "8.00 A.M - 10.00 A.M";
+            case "2":
+                return "10.00 A.M - 12.00 P.M";
+            case "3":
+                return "1.00 P.M - 3.00 P.M";
+            default:
+                return "Error";
+        }
+    }
+
+    public function getCustomerEmailByAppointmentId(PDO $conn, $appointmentId)
+    {
+        try {
+            $sql="SELECT customer_email as email FROM customer INNER JOIN appointment a on a.customer_id = customer.customer_id WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
+        }
+    }
+
+
 }

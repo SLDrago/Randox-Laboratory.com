@@ -99,11 +99,8 @@ class Customer
             $query = "UPDATE customer SET otp_code = :otpCode WHERE username = :username";
             $stmt = $conn->prepare($query);
 
-            // Bind the new token and username to the placeholders
             $stmt->bindParam(':otpCode', $otp_code);
             $stmt->bindParam(':username', $username);
-
-            // Execute the prepared statement
             $stmt->execute();
             return true;
         }catch (PDOException $e){

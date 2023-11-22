@@ -1,3 +1,15 @@
+<?php
+
+if (isset($_POST['EditProfile'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['newPW'];
+    $confPassword = $_POST['confirmPW'];
+
+
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistant Profile</title>
+    <title>Receptionist | EditProfile</title>
     <link rel="stylesheet" href="assets/css/assistantLabtec_editProfile_Style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -13,11 +25,11 @@
 <body>
 
 <div class="card">
-    <img src="assets/images/Profile/labTecEditProfile.jpg" alt="img">
+    <img src="assets/images/Profile/receptionistEditProfile.jpg" alt="img">
 </div>
 <section class="container">
-    <header>Assistant Lab Technician Profile</header>
-    <form name="form2" action="" class="form" method="post" id="">
+    <header>Receptionist Edit Profile</header>
+    <form action="" class="form" method="post" id="">
 
         <div class="input-box">
             <label for="name">Name</label>
@@ -35,7 +47,7 @@
         <div class="input-box">
             <input type="password" id="confirm" placeholder="Confirm Password" name="confirmPW"/>
         </div>
-        <input name="edit" type="submit" value="Edit Profile" id="edit">
+        <input name="edit" type="submit" value="EditProfile" id="edit">
     </form>
 </section>
 

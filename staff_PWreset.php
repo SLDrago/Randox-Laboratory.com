@@ -1,8 +1,50 @@
 <?php
+
+use Classes\DbConnector;
+use Classes\Receptionist;
+use Classes\Labtechnician;
+
+require_once 'vendor/autoload.php';
+
+$db = new DbConnector();
+$conn = $db->getConnection();
+$receptionist = new Receptionist();
+$labTec = new Labtechnician();
+
+if (isset($_POST['updatePW'])) {
+    $username = $_POST['username'];
+    $password = $_POST['newPassword'];
+    $confPassword = $_POST['newPassword'];
+
+    if ($password == $confPassword){
+        $hashPassword = password_hash($password, PASSWORD_BCRYPT);
+        $re = $receptionist->updatePassword($conn,$username,$hashPassword);
+        $lab = $labTec->updatePassword($conn,$username,$hashPassword);
+        if ($re || $lab) {
+            $receptionist->updateOTP($conn,$username,"");
+            $labTec->updateOTP($conn,$username,"");
+            header("location: staff_Login.php");
+            die();
+        }else{
+            header("location: staff_ForgetPassword.php?msg=New Password and Confirm password doesn't match");
+            die();
+        }
+    }else{
+        header("location: staff_OTPverify.php?msg=New Password and Confirm password doesn't match");
+        die();
+    }
+}
+
+if(isset($_POST['verify'])){
+    $username = $_POST['username'];
+    $otp = $_POST['otp'];
+
+    $receptionistOTP = $receptionist->getOTPByUsername($conn,$username);
+    $labTecOTP = $labTec->getOTPByUsername($conn,$username);
+
+    if (isset($receptionistOTP) || isset($labTecOTP)) {
+        if ($otp == $receptionistOTP || $otp == $labTecOTP) {
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -12,8 +54,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Randox-Laboratory | Change Password </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/receptionist_Login_style.css" type="text/css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
 
@@ -22,9 +63,7 @@
 
 <body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 <div class="container">
     <div class="left">
@@ -38,20 +77,20 @@
 
             <br>
             <form action="" method="post">
+                <input type="hidden" name="username" value=" <?php echo $username; ?>">
                 <div class="mb-3">
                     <label for="password_new" class="form-label"><i class="fas fa-lock"></i> New Password </label>
-                    <input type="text" id="password_new" name="password_new" class="form-control"
+                    <input type="text" id="password_new" name="newPassword" class="form-control"
                            placeholder="Enter your new password" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label"><i class="fas fa-lock"></i> Confirm Password </label>
-                    <input type="password" id="password" name="password" class="form-control"
+                    <input type="password" id="password" name="confPassword" class="form-control"
                            placeholder="Enter your confirm password" required>
                 </div>
 
-
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary" name="login">Update Password</button>
+                    <button type="submit" class="btn btn-primary" name="updatePW">Update Password</button>
                 </div>
             </form>
 
@@ -59,9 +98,22 @@
     </div>
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>
 
-
+<?php
+        }else {
+            header("location: staff_OTPverify.php?username=$username&msg=OTP Invalid");
+            die();
+        }
+    }else{
+        header("location: staff_ForgetPassword.php?msg=Something is wrong!");
+        die();
+    }
+}else{
+    header("location: staff_Login.php");
+    die();
+}
+?>

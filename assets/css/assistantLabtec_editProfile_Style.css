@@ -7,20 +7,34 @@
     font-family: "Poppins", sans-serif;
 }
 
+.nav-item {
+    font-size: 24px;
+    float: left;
+    margin: 15px;
+}
+
 body {
-    min-height: 100vh;
+    height: 100%;
+    background-color: rgb(200, 221, 242);
+}
+
+
+.nav {
+    flex-direction: row-reverse;
+}
+
+.body {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 75px;
-    background-color: rgb(200, 221, 242);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     filter: blur(5);
 }
 
-.container {
+.contain {
     position: relative;
     max-width: 600px;
     width: 100%;
@@ -31,7 +45,7 @@ body {
     font-size: 1.25rem;
 }
 
-.container header {
+.contain header {
     font-size: 1.5rem;
     color: #333;
     font-weight: 500;
@@ -40,7 +54,7 @@ body {
     padding: 0;
 }
 
-.container .form {
+.contain .form {
     margin-top: 30px;
 }
 
@@ -76,19 +90,19 @@ body {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
-.card {
+.image {
     border-radius: 5px;
     padding: 0px;
     text-align: center;
     margin: 0px;
 }
 
-.card img {
+.image img {
     width: 50%;
     height: auto;
 }
 
-div.card {
+div.image {
     margin-left: -200px;
     margin-right: -100px;
 }
@@ -119,7 +133,7 @@ div.card {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .container {
+    .contain {
         width: 90%;
         max-width: 100%;
     }

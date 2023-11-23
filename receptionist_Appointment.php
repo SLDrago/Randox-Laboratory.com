@@ -1,4 +1,5 @@
 <?php
+
 use Classes\Appointment;
 use Classes\DbConnector;
 

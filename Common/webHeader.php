@@ -21,7 +21,7 @@ $user = new UserAccount();
         <div class="navigation-items">
 
             <a href="user_home.php" class="nav-link"><b>Home</b></a>
-            <a href="#" class="nav-link"><b>How to prepare</b></a>
+            <a href="User_Howtoprepare.php" class="nav-link"><b>How to prepare</b></a>
             <a href="user_Appointment.php" class="nav-link"><b>Appointment</b></a>
             <a href="user_Reportdownload.php" class="nav-link"><b>Download</b></a>
             <a href="user_ContactUs.php" class="nav-link"><b>Contact us</b></a>

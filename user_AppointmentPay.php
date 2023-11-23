@@ -87,6 +87,9 @@ if (isset($_POST['pay'])) {
             die();
         }
 
+        $customerId = $account->getCustomerID($conn, $pnumber);
+        $account->temporarySaveUserData($conn, $uname, $password, $customerId);
+
         $currentDateTime = new DateTime('now');
         $currentDate = $currentDateTime->format('Y-m-d');
         date_default_timezone_set("Asia/Colombo");
@@ -126,8 +129,8 @@ if (isset($_POST['pay'])) {
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/user_appointment_style.css">
         <title>Payment</title>
     </head>
     <body>
@@ -136,7 +139,7 @@ if (isset($_POST['pay'])) {
         <div class="row">
 
             <div class="image">
-                <img src="/assets/images/appointment/appointment-img.svg" alt="">
+                <img src="assets/images/appointment/appointment-img.svg" alt="">
             </div>
 
 
@@ -202,25 +205,11 @@ if (isset($_POST['pay'])) {
                 <input type="hidden" name="city" value="">
                 <input type="hidden" name="country" value="Sri Lanka">
                 <input type="hidden" name="hash" value="<?php echo $hash; ?>">
-                <input type="submit" value="Pay Now" class="btn-red btn-proceed" onclick="sendEmail()">
+                <input type="submit" value="Pay Now" class="btn-red btn-proceed">
             </form>
         </div>
 
     </section>
-
-    <script>
-        function sendEmail() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    // Handle the response from the server if needed
-                    console.log(this.responseText);
-                }
-            };
-            xhttp.open("GET", "send_email.php?email=<?php echo $email; ?>&uname=<?php echo $uname; ?>&password=<?php echo $password; ?>&appointmentID=<?php echo $order_id; ?>", true);
-            xhttp.send();
-        }
-    </script>
     </body>
     </html>
 <?php
@@ -234,8 +223,8 @@ if (isset($_GET['order_id'])) {
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/user_appointment_style.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/user_appointment_style.css">
         <title>Payment Done!</title>
     </head>
     <body>

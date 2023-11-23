@@ -226,5 +226,46 @@ class UserAccount
         }
     }
 
+    public function temporarySaveUserData(PDO $conn, $username, $password, $customerId): bool
+    {
+        try{
+            $sql = "INSERT INTO tempory_u_data (username,password,customer_id) VALUES (:username,:password,:customerId);";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':customerId', $customerId);
+            $stmt->execute();
+            return true;
+        }catch (PDOException){
+            return false;
+        }
+    }
+
+    public function deleteTemporarySaveUserData(PDO $conn, $customerId): bool
+    {
+        try{
+            $sql = "DELETE FROM tempory_u_data WHERE customer_id = :customerId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':customerId', $customerId);
+            $stmt->execute();
+            return true;
+        }catch (PDOException){
+            return false;
+        }
+    }
+
+    public function getTemporaryUserData(PDO $conn, $customerId)
+    {
+        try {
+            $sql="SELECT * FROM tempory_u_data WHERE customer_id = :customerId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":customerId", $customerId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
+        }
+    }
+
 
 }

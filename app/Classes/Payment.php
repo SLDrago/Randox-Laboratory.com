@@ -2,6 +2,7 @@
 
 namespace Classes;
 use PDO;
+use PDOException;
 
 include 'app/Config/dbh.php';
 
@@ -10,7 +11,7 @@ class Payment
     private string $merchant_id = "1223771";
     private string $currency = "LKR";
     private string $merchant_secret = "MzM4ODU2MTU0NDY3MTQyNDE5MjI4NDAzNDM0MDkyODI0NzMyODUw";
-    private string $return_url = "http://localhost:8080/Randox-Laboratory.com/user_Home.php";
+    private string $return_url = "http://localhost:8080/Randox-Laboratory.com/user_Appointment.php";
     private string $cancel_url  = "http://localhost:8080/Randox-Laboratory.com/user_Home.php";
     private string $notify_url = "http://localhost:8080/Randox-Laboratory.com/success.php";
     private $hash;
@@ -60,7 +61,7 @@ class Payment
         return $this->hash;
     }
 
-    public function getPaymentID($conn,$order_id)
+    public function getPaymentID(PDO $conn,$order_id)
     {
         $check = "SELECT * FROM payment WHERE appointment_id = ?";
         $stmt = $conn->prepare($check);
@@ -91,6 +92,23 @@ class Payment
             return true;
         }else{
             return false;
+        }
+    }
+
+    public function getMonthlyIncome(PDO $conn)
+    {
+        try {
+            $sql = "SELECT SUM(payment_amount) AS total_payment_amount
+            FROM payment
+            WHERE YEAR(payment_date) = YEAR(CURDATE()) AND MONTH(payment_date) = MONTH(CURDATE())";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total_payment_amount'];
+        } catch (PDOException) {
+            return 0;
         }
     }
 

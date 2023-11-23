@@ -40,6 +40,7 @@ class Customer
     public function authenticate($inputUsername, $inputPassword, PDO $pdo)
     {
         try {
+            $hashedpw = null;
             // Prepare the SQL statement with placeholders
             $query = "SELECT password FROM customer WHERE username = :username;";
             $stmt = $pdo->prepare($query);
@@ -98,11 +99,8 @@ class Customer
             $query = "UPDATE customer SET otp_code = :otpCode WHERE username = :username";
             $stmt = $conn->prepare($query);
 
-            // Bind the new token and username to the placeholders
             $stmt->bindParam(':otpCode', $otp_code);
             $stmt->bindParam(':username', $username);
-
-            // Execute the prepared statement
             $stmt->execute();
             return true;
         }catch (PDOException $e){
@@ -145,7 +143,7 @@ class Customer
         }
     }
 
-    public function updatePassword(PDO $conn,$username,$hashedpass)
+    public function updatePassword(PDO $conn,$username,$hashedpass): bool
     {
         try{
             $query = 'UPDATE customer SET password = ? WHERE username = ?';
@@ -159,6 +157,21 @@ class Customer
         }
 
 
+    }
+
+    public function getCustomerCount(PDO $conn)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count FROM customer";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['count'];
+        } catch (PDOException) {
+            return 0;
+        }
     }
 }
 

@@ -10,7 +10,8 @@
     "dompdf/dompdf": "^2.0.3",
     "ext-mysqli": "*",
     "notifylk/notify-php": "*@dev",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-ctype": "*"
   },
   "autoload": {
     "psr-4": {

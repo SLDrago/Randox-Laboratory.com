@@ -7,7 +7,7 @@ use PDOException;
 
 class Appointment
 {
-    private int $maxAttempts = 100; // Maximum number of attempts to find a unique ID
+    private int $maxAttempts = 999999999; // Maximum number of attempts to find a unique ID
     private string $uniqueId = '';
     private int $attempts = 0;
 
@@ -67,6 +67,137 @@ class Appointment
             return $stmt->execute();
         }catch (PDOException $e){
             return false;
+        }
+    }
+
+    public function getAppointmentData(PDO $conn)
+    {
+        try{
+            $query = "SELECT appinment_date as date,appointment_time,payment_id,customer_name,test_name,appointment_id FROM appointment INNER JOIN customer c on appointment.customer_id = c.customer_id INNER JOIN tests t on appointment.report_type = t.test_id ";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException){
+            return null;
+        }
+    }
+
+    public function removeAppointment($appointment_id, PDO $conn ): bool
+    {
+        try{
+            $query = "DELETE FROM appointment WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':appointmentId',$appointment_id);
+            $stmt->execute();
+            return true;
+        }catch (PDOException){
+            return  false;
+        }
+
+    }
+
+    public function getAppointmentInfoById(PDO $conn, $appointmentId)
+    {
+        try{
+            $query = "SELECT appinment_date as date, appointment_time, customer_name, test_name, c.customer_id 
+                  FROM appointment 
+                  INNER JOIN customer c on appointment.customer_id = c.customer_id 
+                  INNER JOIN tests t on appointment.report_type = t.test_id 
+                  WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }catch (PDOException){
+            return null;
+        }
+    }
+
+    public function updatePaymentId(PDO $conn, $appointmentId, $paymentId): bool
+    {
+        try {
+            $query = "UPDATE appointment SET payment_id = :paymentId WHERE appointment_id = :appointmentId;";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':paymentId', $paymentId);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return true;
+        }catch (PDOException){
+            return false;
+        }
+    }
+
+    public function updateAppointment(PDO $conn, $appointmentId, $date, $timeSlot): bool
+    {
+        try {
+            $query = "UPDATE appointment SET appinment_date = :appointmentDate, appointment_time = :appointmentTime WHERE appointment_id = :appointmentId;";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':appointmentDate', $date);
+            $stmt->bindParam(':appointmentTime', $timeSlot);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return true;
+        }catch (PDOException){
+            return false;
+        }
+    }
+
+    public function getTodayAppointmentCount(PDO $conn)
+    {
+        try {
+            $sql = "SELECT COUNT(*) AS appointment_count
+            FROM appointment
+            WHERE DATE(appinment_date) = CURDATE()";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['appointment_count'];
+
+        } catch (PDOException) {
+            return 0;
+        }
+    }
+
+    public function getCustomerPhoneByAppointmentId(PDO $conn, $appointmentId)
+    {
+        try {
+            $sql="SELECT customer_pnumber as phone FROM customer INNER JOIN appointment a on a.customer_id = customer.customer_id WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
+        }
+    }
+
+    public function getAppointmentTimeByAppointmentSlotId($timeSlot): string
+    {
+        switch ($timeSlot) {
+            case "1":
+                return "8.00 A.M - 10.00 A.M";
+            case "2":
+                return "10.00 A.M - 12.00 P.M";
+            case "3":
+                return "1.00 P.M - 3.00 P.M";
+            default:
+                return "Error";
+        }
+    }
+
+    public function getCustomerEmailByAppointmentId(PDO $conn, $appointmentId)
+    {
+        try {
+            $sql="SELECT customer_email as email FROM customer INNER JOIN appointment a on a.customer_id = customer.customer_id WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':appointmentId', $appointmentId);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
         }
     }
 

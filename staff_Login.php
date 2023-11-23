@@ -35,6 +35,8 @@ if (isset($_POST['login'])){
             $_SESSION['Labtec'] = $uname;
             header("location: juniorLabTech_Dashboard.php");
             die();
+        }else{
+            $msg = "<div class='bg-warning text-center mx-1'>Username or Password Invalid</div>";
         }
     }else{
         $msg = "<div class='bg-warning text-center mx-1'>Username or Password Invalid</div>";

@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../images/Labtechnision/3.jpg');
+    /* margin: 0; */
+    /* height: 100vh; */
+    /* overflow-y: auto; */
+    height: 500px;
+
+}
+
+header {
+    z-index: 999;
+    background-color: rgb(155, 208, 236);
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 100px;
+    transition: 0.5s ease;
+}
+
+header .navigation {
+    position: relative;
+
+
+}
+
+header .navigation .navigation-items a {
+    position: relative;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 27px;
+    transition: 0.3s ease;
+}
+
+header .navigation .navigation-items .nav-link:hover {
+    background: #ffa500;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+header .navigation .navigation-items a button {
+    padding: 5px 25px;
+    border-radius: 25px;
+    background-color: #000D4D;
+    border: none;
+    color: #fff;
+}
+
+header .navigation .navigation-items a button:hover {
+    background-color: #ffa500;
+    padding: 6px 27px;
+}
+
+/* Add this CSS to your existing styles */
+.contact-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contact-dropdown-content a {
+    color: #000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.contact-dropdown-content a:hover {
+    background-color: #f2f2f2;
+}
+
+
+.container {
+    margin: 20px;
+    text-align: center;
+}
+
+table {
+    width: 60%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    padding: 20px;
+    margin-left: 550px;
+    border: 2px solid black;
+
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+
+}
+
+
+
+.edit-button,
+.delete-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #28a745;
+}
+
+
+
+.edit-details {
+    /* border: 1px solid #ccc; */
+    padding: 10px;
+    margin: 0 auto;
+}
+
+#confirm-button {
+    margin-top: 20px;
+    size: 40px;
+    color: #007bff;
+    border-radius: 5px;
+}
+
+#redirect-button {
+    margin-top: 20px;
+    size: 40px;
+    color: #007bff;
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+#redirect-button {
+    padding: 10px;
+    color: #007bff;
+    opacity: 75%;
+    border-radius: 5px;
+
+}
+
+/* Custom CSS for centering the button */
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15vh;
+    color: azure;
+}
+
+#confirm-button {
+    color: #fff;
+    font-size: 20px;
+    justify-content: center;
+    margin-left: 600px;
+    align-items: center;
+}
+
+.centered:hover {
+    color: #28a745;
+}
+
+.navigation {
+    text-align: center;
+    display: inline-block;
+
+}
+
+.navigation-items {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.nav-link {
+    display: inline-block;
+    margin-right: 15px;
+    text-decoration: none;
+    color: #000;
+}
+
+.form-group label {
+    float: left;
+    font-size: 20px;
+}

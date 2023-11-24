@@ -34,6 +34,7 @@ if (isset($_GET['order_id'])) {
     $customerId = $appointmentData['customer_id'];
     $time=$appointment->getAppointmentTimeByAppointmentSlotId($timeSlot);
     $sms->sendSMS($phone,"Your Appointment scheduled Successfully! Appointment No.:$appointmentId Appointment Date: $date Appointment Time: $time   - Randox-Laboratory");
+    $mail->sendMail($customerEmail, "Your Appointment Details - Randox-Laboratory.com","Your Appointment scheduled Successfully!<br><br><b>Appointment No.:</b>$appointmentId<br><b>Appointment Date:</b> $date<br><b>Appointment Time:</b> $time   <br>- Randox-Laboratory");
     $userData=$user->getTemporaryUserData($conn, $customerId);
     if (isset($userData)){
         $username = $userData['username'];

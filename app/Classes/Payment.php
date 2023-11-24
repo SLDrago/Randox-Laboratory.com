@@ -11,7 +11,7 @@ class Payment
     private string $merchant_id = "1223771";
     private string $currency = "LKR";
     private string $merchant_secret = "MzM4ODU2MTU0NDY3MTQyNDE5MjI4NDAzNDM0MDkyODI0NzMyODUw";
-    private string $return_url = "http://localhost:8080/Randox-Laboratory.com/user_Appointment.php";
+    private string $return_url = "http://localhost:8080/Randox-Laboratory.com/user_Home.php";
     private string $cancel_url  = "http://localhost:8080/Randox-Laboratory.com/user_Home.php";
     private string $notify_url = "http://localhost:8080/Randox-Laboratory.com/success.php";
     private $hash;

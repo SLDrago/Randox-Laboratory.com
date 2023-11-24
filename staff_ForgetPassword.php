@@ -32,7 +32,8 @@ if (isset($_POST['otp'])){
     $labTecEmail = $labTec->getEmailByUsername($conn,$username);
 
     $otp = generateOTP();
-
+    echo "recep".$receptionistEmail;
+    echo "labtec".$labTecEmail;
     if (isset($receptionistEmail)){
         $receptionist->updateOTP($conn,$username,$otp);
         $mail->sendMail($receptionistEmail,"Password Reset OTP Code :: Randox-Laboratory","This is your OTP Code for your account Password Reset, <br><br>OTP Code: $otp <br><br>If you didnt request a password change contact system admin.");

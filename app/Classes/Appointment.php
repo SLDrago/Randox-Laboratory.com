@@ -168,7 +168,8 @@ class Appointment
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':appointmentId', $appointmentId);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['phone'];
         } catch (PDOException) {
             return null;
         }
@@ -195,7 +196,26 @@ class Appointment
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':appointmentId', $appointmentId);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['email'];
+        } catch (PDOException) {
+            return null;
+        }
+    }
+
+    public function getTestIdByAppointment (PDO $conn,$appointmentId)
+    {
+        try {
+            $query = "SELECT report_type FROM appointment WHERE appointment_id = :appointmentId";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':appointmentId',$appointmentId);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                return $result['report_type'];
+            }else{
+                return null;
+            }
         } catch (PDOException) {
             return null;
         }

@@ -2,14 +2,14 @@
 
 namespace Classes;
 require_once 'vendor/autoload.php';
-require_once('vendor/notifylk/notify-php/autoload.php');
+require_once 'vendor/notifylk/notify-php/autoload.php';
 
 use Exception;
 use NotifyLk\Api\SmsApi;
 class SMS
 {
-    private string $user_id = "25609";
-    private string $api_key = "92WAh2w8fPJoBTIJIjPc";
+    private string $user_id = "26118";
+    private string $api_key = "91RMO9eH88LHH58jsDGm";
     private string $sender_id = "NotifyDEMO";
 
     public function sendSMS($phone,$message)

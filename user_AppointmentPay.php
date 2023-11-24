@@ -87,9 +87,6 @@ if (isset($_POST['pay'])) {
             die();
         }
 
-        $customerId = $account->getCustomerID($conn, $pnumber);
-        $account->temporarySaveUserData($conn, $uname, $password, $customerId);
-
         $currentDateTime = new DateTime('now');
         $currentDate = $currentDateTime->format('Y-m-d');
         date_default_timezone_set("Asia/Colombo");
@@ -205,11 +202,25 @@ if (isset($_POST['pay'])) {
                 <input type="hidden" name="city" value="">
                 <input type="hidden" name="country" value="Sri Lanka">
                 <input type="hidden" name="hash" value="<?php echo $hash; ?>">
-                <input type="submit" value="Pay Now" class="btn-red btn-proceed">
+                <input type="submit" value="Pay Now" class="btn-red btn-proceed" onclick="sendEmail()">
             </form>
         </div>
 
     </section>
+
+    <script>
+        function sendEmail() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    // Handle the response from the server if needed
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "send_email.php?email=<?php echo $email; ?>&uname=<?php echo $uname; ?>&password=<?php echo $password; ?>&appointmentID=<?php echo $order_id; ?>", true);
+            xhttp.send();
+        }
+    </script>
     </body>
     </html>
 <?php

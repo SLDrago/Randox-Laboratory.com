@@ -133,4 +133,32 @@ class Labtechnician
             return null;
         }
     }
+
+    public function temporaryAddReportData (PDO $conn, $appointmentId, $testId, $dataArray): bool
+    {
+        $serializedArray = serialize($dataArray);
+        try {
+            $sql = "INSERT INTO temp_report (test_id,appointment_id,data) VALUES (:testId,:appointmentId,:data)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":testId",$testId);
+            $stmt->bindParam(":appointmentId",$appointmentId);
+            $stmt->bindParam(":data", $serializedArray);
+            $stmt->execute();
+            return true;
+        } catch (PDOException) {
+            return false;
+        }
+    }
+
+    public function getAllTemporyReportData (PDO $conn)
+    {
+        try {
+            $sql = "SELECT temp_id, a.appointment_id, customer_name, report_type,test_name, data FROM temp_report inner join randox_laboratory.appointment a on temp_report.appointment_id = a.appointment_id inner join randox_laboratory.customer c on a.customer_id = c.customer_id inner join randox_laboratory.tests t on temp_report.test_id = t.test_id";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            return null;
+        }
+    }
 }

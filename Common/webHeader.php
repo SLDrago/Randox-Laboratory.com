@@ -43,7 +43,7 @@ $user = new UserAccount();
                     </button>
                     <div class="dropdown-content" id="myDropdown">
                         <a href="user_EditProfile.php">Edit Profile</a>
-                        <a href="user_Download.php">Download</a>
+                        <a href="user_Appointment_Reshedule.php">Appointment Reschedule</a>
                         <a href="user_Logout.php">Log out</a>
                     </div>
                 </div>

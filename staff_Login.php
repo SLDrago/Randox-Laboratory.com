@@ -33,7 +33,7 @@ if (isset($_POST['login'])){
             die();
         }elseif ($labTec->verifyLabTech($uname,$pass,$conn) == "junior") {
             $_SESSION['Labtec'] = $uname;
-            header("location: juniorLabTech_Dashboard.php");
+            header("location: assistantLabTech_Dashboard.php");
             die();
         }else{
             $msg = "<div class='bg-warning text-center mx-1'>Username or Password Invalid</div>";

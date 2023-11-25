@@ -11,7 +11,7 @@ $labTec = new Labtechnician();
 $db = new DbConnector();
 $conn = $db->getConnection();
 
-$username = $_SESSION['labtec'];
+$username = $_SESSION['Labtec'];
 
 $data = $labTec->getLabTecDataByUsername($conn, $username);
 

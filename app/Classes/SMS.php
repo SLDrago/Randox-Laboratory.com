@@ -8,8 +8,8 @@ use Exception;
 use NotifyLk\Api\SmsApi;
 class SMS
 {
-    private string $user_id = "26118";
-    private string $api_key = "91RMO9eH88LHH58jsDGm";
+    private string $user_id = "26122";
+    private string $api_key = "nqFF2I372eehSUiTY3oI";
     private string $sender_id = "NotifyDEMO";
 
     public function sendSMS($phone,$message)

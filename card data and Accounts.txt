@@ -7,3 +7,9 @@ AMEX : 346781005510225
 
 For ‘Name on Card’, ‘CVV’ & ‘Expiry date’ you can enter any valid data.
 Any card except the above test cards will result in a failed payment.
+
+UName | Password |
+
+Admin - 789456123    -> Receptionist
+Kalana - 789456123   -> senior
+Vishwa - 789456123   -> assistant

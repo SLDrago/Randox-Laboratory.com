@@ -16,8 +16,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($data){
             $otp = $sms->generateOTP();
             $api_instance = new NotifyLk\Api\SmsApi();
-            $user_id = "26118"; // string | API User ID - Can be found in your settings page.
-            $api_key = "91RMO9eH88LHH58jsDGm"; // string | API Key - Can be found in your settings page.
+            $user_id = "26122"; // string | API User ID - Can be found in your settings page.
+            $api_key = "nqFF2I372eehSUiTY3oI"; // string | API Key - Can be found in your settings page.
             $message1 = "Randox Laboratory Badulla"."      ".$username . " your OTP " . $otp;
             // string | Text of the message. 320 chars max.
 

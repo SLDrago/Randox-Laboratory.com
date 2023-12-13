@@ -1,5 +1,7 @@
 <?php
 
+include 'Common/labTecValidate.php';
+
 use Classes\DbConnector;
 use Classes\Appointment;
 use Classes\Labtechnician;
@@ -64,6 +66,7 @@ if (isset($_POST['fullBloodSave'])){
         <div class="navigation-items">
 
             <a href="assistantLabTech_Dashboard.php" class="nav-link"><b>Home</b></a>
+            <a href="assistantLabTech_editProfile.php" class="nav-link"><b>Edit Profile</b></a>
 
             <a href="staff_Login.php"><button><b>Login</button></b></a>
         </div>

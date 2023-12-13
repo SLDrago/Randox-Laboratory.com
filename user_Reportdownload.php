@@ -1,4 +1,6 @@
-<?php include 'filesLogic.php'; ?>
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 
 <html>
@@ -40,17 +42,33 @@
                             <th> Action</th>
                             </thead>
                             <tbody>
-                                <?php foreach ($files as $file): ?> 
                                     <tr>
-                                        <td><?php echo $file['id']; ?></td>
-                                        <td><?php echo $file['name']; ?></td>
-                                        <td><?php echo $file['size'] / 1000 . "KB"; ?></td>
-                                        <td><?php echo $file['downloads']; ?></td>
+                                        <td>23456</td>
+                                        <td>23456_urine.pdf</td>
+                                        <td>10.8Kb</td>
+                                        <td>0</td>
                                         <td>
-                                            <a class="btn btn-primary" href="index.php?file_id= <?php echo $file['id'] ?>" role="button" >Download</a>
+                                            <a class="btn btn-primary" href="index.php?file_id=" role="button" >Download</a>
                                         </td>
-                                    </tr>    
-                                <?php endforeach; ?>
+                                    </tr>
+                                    <tr>
+                                        <td>28956</td>
+                                        <td>28956_urine.pdf</td>
+                                        <td>12.8Kb</td>
+                                        <td>0</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="index.php?file_id=" role="button" >Download</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>23456</td>
+                                        <td>23456_urine.pdf</td>
+                                        <td>10.8Kb</td>
+                                        <td>0</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="index.php?file_id=" role="button" >Download</a>
+                                        </td>
+                                    </tr>
                             </tbody>
                         </table> 
                     </div>  

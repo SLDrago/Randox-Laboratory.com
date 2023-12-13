@@ -1,4 +1,7 @@
+
 <?php
+include 'Common/labTecValidate.php';
+
 use Classes\Labtechnician;
 use Classes\DbConnector;
 use Classes\pdfGenerator;
@@ -139,23 +142,23 @@ $data = $labTec->getAllTemporyReportData($conn);
                                             <form id="confirmForm">
                                                 <div class="form-group">
                                                     <label for="redblood">Red Blood Count:</label>
-                                                    <input type="text" class="form-control" id="redblood" value="<?php echo $row['temp_id']; ?>" required>
+                                                    <input type="text" class="form-control" id="redblood" value="<?php echo $reportData['urineR']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="protein">Protein:</label>
-                                                    <input type="text" class="form-control" id="protein" value="<?php echo $row['temp_id']; ?>" required>
+                                                    <input type="text" class="form-control" id="protein" value="<?php echo $reportData['urineP']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="glucose">Glucose:</label>
-                                                    <input type="text" class="form-control" id="glucose" value="<?php echo $row['temp_id']; ?>" required>
+                                                    <input type="text" class="form-control" id="glucose" value="<?php echo $reportData['urineG']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="specificgravity">Specific Gravity:</label>
-                                                    <input type="text" class="form-control" id="specificgravity" value="<?php echo $row['temp_id']; ?>" required>
+                                                    <input type="text" class="form-control" id="specificgravity" value="<?php echo $reportData['urineGr']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="color">Color:</label>
-                                                    <input type="text" class="form-control" id="color" value="<?php echo $row['temp_id']; ?>" required>
+                                                    <input type="text" class="form-control" id="color" value="<?php echo $reportData['urineCo']; ?>" required>
                                                 </div>
 
                                                 <button type="button" class="btn btn-primary" onclick="submitConfirmForm()">Confirm</button>

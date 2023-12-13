@@ -40,7 +40,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="receptionist_EditProfile.php"><b><i class="bi bi-person-lines-fill"></i> &nbsp;PROFILE</b></a></li>
-                            <li><a class="dropdown-item" href="#"><b><i class="bi bi-gear-wide-connected"></i> &nbsp;ADMINISTRATION</b></a></li>
+                            <li><a class="dropdown-item" href="Admin.php"><b><i class="bi bi-gear-wide-connected"></i> &nbsp;Staff Account</b></a></li>
+                            <li><a class="dropdown-item" href="Admin_ContactUs.php"><b><i class="bi bi-gear-wide-connected"></i> ContactUs</b></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
